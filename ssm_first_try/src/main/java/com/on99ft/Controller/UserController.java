@@ -72,10 +72,11 @@ public class UserController {
     @GetMapping("/checkStatus")
     public Result checkStatus(HttpSession session){
         Long theId = (Long) session.getAttribute("theId");
-        if("404".equals(theId)){
+        if(theId==null||theId==404L||theId==0L){
             return new Result(Code.GET_ERR,"404",theId);
         }
-        return new Result(Code.GET_OK,"Successfully!",theId);
+        User loginUser = userService.selectId(theId);
+        return new Result(Code.GET_OK,"Successfully!",loginUser);
     }
 
     @GetMapping("/count")
