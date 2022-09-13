@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KKKKKKK</title>
+    <!--todo import css-->
+    <link rel="stylesheet" href="//fonts.geekzu.org/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="../plugins/line-icons-pro/styles.css">
+    <link rel="stylesheet" href="../plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="../css/custom.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="list-inline top-v1-contacts">
+                <li>
+                    <i class="fa fa-envelope"></i>s5nbny5@gmail.com
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <div class="header-v1">
+        <div class="navbar mega-menu" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li class="mega-menu-fullwidth">
+                        <a href="ft1.html">FT1</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="app" class="container" style="background-color: burlywood;">
+    <h3>{{this.$data.code}}</h3>
+    <h6>{{this.$data.msg}}</h6>
+    <li class="mega-menu-fullwidth" style="list-style: none" v-for="d in this.$data.data">
+        <div class="col-sm-6" style="margin-bottom: 50px">
+            <div class="service-block-v8" style="background-color: whitesmoke">
+                <div v-if="dialogFormVisible4Edit" class="container-fluid" style="background-color: gainsboro">
+                    <div class="input-group" style="background-color: cornsilk;margin-bottom: 20px;">
+                        <!--<input type="text" id="title" class="form-control" v-bind:value="d.title" style="width: 300px;height: 60px;padding: 6px;">-->
+                        <textarea cols="60" rows="2" id="title" v-model="d.title" style="resize: none"></textarea>
+                    </div>
+                    <div class="input-group" style="background-color: cornsilk;margin-bottom: 20px;">
+                        <!--<input type="text" id="text_in" class="form-control" v-bind:value="d.text" style="width: 300px;height: 500px;padding: 6px;">-->
+                        <textarea cols="60" rows="20" id="text" v-model="d.text" style="resize: none"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn-warning pull-left" id="the_cancel" v-on:click="the_cancel()">取消</button>
+                        <button class="btn-success pull-right" id="the_submit" v-on:click="the_submit(d.id)">提交</button>
+                    </div>
+                </div>
+                <div v-if="originFormVisible" style="background-color: gainsboro">
+                    <button class="btn-warning pull-right" v-bind:id="d.id" v-on:click="del_msg(d.id)">删除</button>
+                    <button class="btn-success pull-right" v-bind:id="d.id" v-on:click="showYourself()">编辑</button>
+                    <div class="service-block-v6">
+                        <!--<h3>{{d.id}}</h3>-->
+                        <h3 style="background-color: whitesmoke">{{d.title}}</h3>
+                        <p style="background-color: whitesmoke">{{d.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</div>
+</body>
+<!--todo import js-->
+<script src="../js/axios-0.18.0.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script>
+    var url = "/knowledge/";
+    var app1 = new Vue({
+        el:'#app',
+        data:{
+            formData: {},//表单数据
+            dialogFormVisible4Edit:false,//编辑表单是否可见
+            originFormVisible:true,
+            code: 0 ,
+            msg:"",
+            data:[]
+        },
+        methods: {
+          del_msg:function(id){
+              console.log(id);
+          },
+          getAll: function (){
+              axios({
+                  url:url,
+                  method:"GET",
+              }).then((res)=>{
+                  this.$data.code = res.data.code;
+                  this.$data.msg = res.data.msg;
+                  this.$data.data = res.data.data;
+              })
+          },
+          showYourself(){
+              this.$data.dialogFormVisible4Edit=true;
+              this.$data.originFormVisible=false;
+          },
+          the_cancel(){
+              var tmp = document.getElementById('title').value;
+              console.log(tmp);
+              this.$data.dialogFormVisible4Edit=false;
+              this.$data.originFormVisible=true;
+          },
+          the_submit(id){
+              console.log(id);
+              this.$data.dialogFormVisible4Edit=false;
+              this.$data.originFormVisible=true;
+              this.getAll();
+          }
+        },
+        beforeMount(){
+            this.getAll();
+        }
+    })
+</script>
+</html>

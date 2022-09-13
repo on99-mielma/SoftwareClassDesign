@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="//fonts.geekzu.org/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="../plugins/line-icons-pro/styles.css">
+    <link rel="stylesheet" href="../plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+    <link rel="stylesheet" href="../plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="../css/custom.css">
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="../css/blog_timeline.css">
+    <!-- Theme CSS -->
+    <link type="text/css" href="../assets/css/theme.css" rel="stylesheet">
+    <!-- Demo CSS - No need to use these in your project -->
+    <link type="text/css" href="../assets/css/demo.css" rel="stylesheet">
+</head>
+<body>
+<p>胶囊式导航</p>
+<ul class="nav nav-pills">
+    <li class="active">
+        <a href="#">Home</a>
+    </li>
+    <li><a href="#">SVN</a></li>
+    <li><a href="#">iOS</a></li>
+    <li><a href="#">VB.Net</a></li>
+    <li><a href="#">Java</a></li>
+    <li><a href="#">PHP</a></li>
+</ul>
+<br><br><br><br>
+<ul class="pagination">
+    <li><a href="#">&laquo;</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+<br>
+<div id="app1"  class="container">
+    <h1>科室导航</h1>
+    <div class="navbar mega-menu navbar-expand-sm bg-light" role="navigation" style="margin-bottom: 10px">
+        <div class="container">
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+                <ul class="navbar-nav nav nav-pills">
+                    <li class="nav-pills mega-menu-fullwidth">
+                        <a v-on:click="">
+                            非手术科室
+                        </a>
+                    </li>
+                    <li class="nav-pills mega-menu-fullwidth">
+                        <a v-on:click="">
+                            手术科室
+                        </a>
+                    </li>
+                    <li class="nav-pills mega-menu-fullwidth">
+                        <a v-on:click="">
+                            诊断相关科室
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container" v-if="split_1">
+                <ul style="width:700px;height:11cm;overflow: hidden;margin-bottom: 5px;">
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="内科学系" data-text="北京协和医院内科学系自1921年建院之初即成立，是最早成立的临床科室之一，也是中国现代内科学的发源地。百年沧桑...">
+                            <i></i>"内科学系"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="心内科" data-text="      北京协和医院心内科历史悠久，是我国心血管病学科发展的摇篮。1921年6月北京协和医院使用弦线式心电...">
+                            <i></i>"心内科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="呼吸内科" data-text="      北京协和医院呼吸内科是由我国已故著名呼吸病学专家——朱贵卿教授创建的、具有悠久历史的学科专业。作为...">
+                            <i></i>"呼吸内科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="消化内科" data-text="      消化内科是北京协和医院成立最早的专科之一，由我国现代内科学泰斗张孝骞教授和著名消化病专家陈敏章教授...">
+                            <i></i>"消化内科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="肾内科" data-text="      1979年，肾脏病学在中国作为一个崭新的学科才刚刚起步,毕增祺教授有远见的创立了北京协和医院内科肾...">
+                            <i></i>"肾内科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="血液内科" data-text="      北京协和医院血液科具有悠久的历史，是我国现代血液学的先驱者，也是我国培养血液学专业人才的最早基地。...">
+                            <i></i>"血液内科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="感染内科" data-text="      北京协和医院感染科是北京协和医院最早成立的科室之一，在老一批传染病专家的传承带领下，感染科历届主任...">
+                            <i></i>"风湿免疫科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="全科医学科（普通内科）" data-text="      北京协和医院全科医学科（普通内科）的建立起始于美国纽约中华医学基金会项目“面向21世纪建设高质量、...">
+                            <i></i>"全科医学科（普通内科）"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="肿瘤内科" data-text="      北京协和医院肿瘤内科是国家卫计委临床重点专科建设项目科室。现有教授1名、副教授6名、主治医师10名...">
+                            <i></i>"肿瘤内科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="MICU" data-text="      北京协和医院MICU成立于2005年，隶属于协和医院内科，为一个主要收治各种内科重症患者的综合性I...">
+                            <i></i>"MICU"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="老年医学科" data-text="　　老年医学科隶属于大内科，其临床医生均有7年以上的临床经验，均完成了内科各专业组和急诊的轮转学习。现有主任医...">
+                            <i></i>"老年医学科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="内分泌科" data-text="      北京协和医院内分泌科的发展是伴随着北京协和医院的历史脚步而前行的。1921年，北京协和医院正式落成...">
+                            <i></i>"内分泌科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="重症医学科" data-text="                      千锤百炼始成钢，百炼成钢绕指柔">
+                            <i></i>"重症医学科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="儿科" data-text="　　北京协和医院儿科成立于北京协和医院建院之初的1921年，孕育了中国儿科发展的奠基人和多位儿科大家，是中国现...">
+                            <i></i>"儿科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="神经科" data-text="　　北京协和医院神经科成立于1921年，历经90余载风雨，已经成为全国久负盛名的神经专科，是国内最早的神经病学...">
+                            <i></i>"神经科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="心理医学科" data-text="　　北京协和医院心理医学科是在北京协和医院心理生理中心的基础上重组成立的。科室重组成立于2006年5月。我科采...">
+                            <i></i>"心理医学科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="皮肤科" data-text="　　北京协和医院皮肤科成立于1924年，是我国最早的皮肤性病学科之一。首任主任Dr. Chester N. F...">
+                            <i></i>"皮肤科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="变态反应科" data-text="　　北京协和医院变态反应科是中国临床变态反应学的发源地和摇篮。">
+                            <i></i>"变态反应科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="急诊科" data-text="      北京协和医院急诊科承担着院内急诊与急救服务重任，从1983年建科以来，经过30余年的建设与发展，急...">
+                            <i></i>"急诊科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="中医科" data-text="　　北京协和医院中医办公室成立于1955年，1961年正式命名中医科，当时由著名中西医结合专家史济招教授担任科...">
+                            <i></i>"中医科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="康复医学科" data-text="　　1921年，北京协和医院成立，同年，时任神经科主任的美国人Andrew H Woods教授创立了理疗室，开...">
+                            <i></i>"康复医学科"
+                        </a>
+                    </li>
+                    <li class="on99">
+                        <a href="#" data-src="../图片" data-title="临床营养科" data-text="        北京协和医院临床营养科由原营养科和肠外肠内营养科合并组成。北京协和医院营养科具有悠久历史...">
+                            <i></i>"临床营养科"
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div
+        </div>
+    </div>
+</div>
+</body>
+
+<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+<script src="../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../assets/vendor/popper/popper.min.js"></script>
+<script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+<script src="../js/axios-0.18.0.js"></script>
+<script src="../js/vue.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="../plugins/cube-portfolio/js/jquery.cubeportfolio.min.js"></script>
+
+<script type="text/javascript" src="../plugins/cube-portfolio/js/cube-portfolio-3.js"></script>
+<!-- Login Javascript -->
+<script type="text/javascript" src="../plugins/jquery/validation.js"></script>
+<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="../plugins/bootstrap/js/bootstrap.min.js"></script>-->
+<!-- FontAwesome 5 -->
+<script src="../assets/vendor/fontawesome/js/fontawesome-all.min.js" defer></script>
+<!-- Page plugins -->
+<script src="../assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="../assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<script src="../assets/vendor/input-mask/input-mask.min.js"></script>
+<script src="../assets/vendor/nouislider/js/nouislider.min.js"></script>
+<script src="../assets/vendor/textarea-autosize/textarea-autosize.min.js"></script>
+<!-- Theme JS -->
+<script src="../assets/js/theme.js"></script>
+
+</html>
