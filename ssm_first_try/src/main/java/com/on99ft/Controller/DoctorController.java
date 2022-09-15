@@ -1,7 +1,9 @@
 package com.on99ft.Controller;
 
 import com.on99ft.domain.Doctor;
+import com.on99ft.domain.Dtt;
 import com.on99ft.service.DoctorService;
+import com.on99ft.service.DttService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +17,19 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+    private DttService dttService;
+
     @PostMapping("/insert")
     public Result insert(@RequestBody Doctor d){
         Boolean pd = doctorService.insert(d);
+        Dtt dtt = new Dtt();
+        Boolean pd2 = false;
+        if(pd){
+            dtt.setId(d.getId());
+            pd2 = dttService.insert(dtt);
+            return new Result(pd2?Code.SAVE_OK:Code.SAVE_ERR,"DOCTOR+DTT status:",pd2);
+        }
         return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
     }
 
@@ -69,8 +81,37 @@ public class DoctorController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
-        Boolean pd = doctorService.delete(id);
-        return new Result(pd?Code.DELETE_OK:Code.DELETE_ERR,pd);
+        /*Boolean pd = doctorService.delete(id);
+        Dtt dtt = new Dtt();
+        Boolean pd2 = false;
+        if(pd){
+            Dtt tmp = dttService.selectOne(id);
+            if(tmp==null){
+                return new Result(pd?Code.DELETE_OK:Code.DELETE_ERR,"noDTT",pd);
+            }
+            else{
+                dtt.setId(id);
+                pd2 = dttService.delete(dtt);
+                return new Result(pd2?Code.DELETE_OK:Code.DELETE_ERR,"DTT status:",pd2);
+            }
+        }
+        return new Result(pd?Code.DELETE_OK:Code.DELETE_ERR,pd);*/
+        Dtt dtt = new Dtt();
+        Boolean pd2 = false;//Dtt pd
+        Boolean pd =false;//Doctor pd
+        Dtt tmp = dttService.selectOne(id);
+        if(tmp==null){
+            return new Result(pd2?Code.DELETE_OK:Code.DELETE_ERR,"noDTT",pd2);
+        }
+        else{
+            dtt.setId(id);
+            pd2 = dttService.delete(dtt);
+            if(pd2){
+                pd = doctorService.delete(id);
+                return new Result(pd?Code.DELETE_OK:Code.DELETE_ERR,pd);
+            }
+            return new Result(pd2?Code.DELETE_OK:Code.DELETE_ERR,"dtt right doctor error",pd2);
+        }
     }
 
     @GetMapping("/count")

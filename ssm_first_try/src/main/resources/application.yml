@@ -11,3 +11,7 @@ mybatis-plus:
   global-config:
     db-config:
       update-strategy: not_empty
+
+logging:
+  file:
+    name: D:/aComputerScience/Project/software-class/ssm_first_try/log/springlog.log

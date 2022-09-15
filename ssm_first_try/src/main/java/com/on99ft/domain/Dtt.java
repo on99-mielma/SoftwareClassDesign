@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Dtt {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
-    private String name;
     private String morning;
     private String afternoon;
     private String night;
@@ -19,7 +18,6 @@ public class Dtt {
     public String toString() {
         return "Dtt{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", morning='" + morning + '\'' +
                 ", afternoon='" + afternoon + '\'' +
                 ", night='" + night + '\'' +
@@ -32,14 +30,6 @@ public class Dtt {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMorning() {

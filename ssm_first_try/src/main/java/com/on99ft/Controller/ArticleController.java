@@ -29,7 +29,7 @@ public class ArticleController {
     @DeleteMapping
     public Result delete(@RequestBody Article article){
         boolean pd = articleService.delete(article);
-        return new Result(pd?Code.DELETE_OK:Code.DELETE_ERR,pd);
+        return new Result(pd?Code.DELETE_OK:Code.DELETE_ERR,pd?Code.SDELETE_OK:Code.SDELETE_ERR,pd);
     }
 
     @GetMapping("/{id}")

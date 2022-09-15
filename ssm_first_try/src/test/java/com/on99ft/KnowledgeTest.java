@@ -2,9 +2,11 @@ package com.on99ft;
 
 import com.on99ft.domain.Article;
 import com.on99ft.domain.Doctor;
+import com.on99ft.domain.Dtt;
 import com.on99ft.domain.Knowledge;
 import com.on99ft.service.ArticleService;
 import com.on99ft.service.DoctorService;
+import com.on99ft.service.DttService;
 import com.on99ft.service.KnowledgeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class KnowledgeTest {
 
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private DttService dttService;
 
     @Test
     void test0(){
@@ -85,10 +90,19 @@ public class KnowledgeTest {
     @Test
     void test5(){
         Doctor d = new Doctor();
-        d.setName("on99");
-        d.setOffice("内科");
-        d.setInfo("");
-        d.setSkill("");
+        d.setName("66uo");
+        d.setOffice("心脏内科");
+        d.setInfo("1");
+        d.setSkill("1");
         doctorService.insert(d);
+        System.out.println("d = " + d);
+    }
+
+    @Test
+    void test6(){
+        Dtt dtt = new Dtt();
+        dtt.setId(1570252461800316930L);
+        dttService.insert(dtt);
+        System.out.println("dtt = " + dtt);
     }
 }
