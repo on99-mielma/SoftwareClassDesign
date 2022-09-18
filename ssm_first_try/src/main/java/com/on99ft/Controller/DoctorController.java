@@ -46,7 +46,7 @@ public class DoctorController {
         Doctor k = doctorService.getById(id);
         Integer code = k!=null?Code.GET_OK:Code.GET_ERR;
         String msg = k!=null?"Yes":"No";
-        return new Result(code,msg,k);
+        return new Result(code,msg,k,0);
     }
 
     @GetMapping
@@ -54,7 +54,7 @@ public class DoctorController {
         List<Doctor> knowledgeList = doctorService.getAll();
         Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
         String msg = knowledgeList!=null?"Yes":"No";
-        return new Result(code,msg,knowledgeList);
+        return new Result(code,msg,knowledgeList,0);
     }
     @GetMapping(value = "/gs")
     public Result getAllgs(){
@@ -76,7 +76,7 @@ public class DoctorController {
         }
         Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
         String msg = knowledgeList!=null?"Yes":"No";
-        return new Result(code,msg,knowledgeList);
+        return new Result(code,msg,knowledgeList,0);
     }
 
     @DeleteMapping("/{id}")

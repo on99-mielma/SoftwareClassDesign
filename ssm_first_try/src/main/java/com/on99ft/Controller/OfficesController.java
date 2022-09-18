@@ -39,14 +39,14 @@ public class OfficesController {
         Offices offices = officesService.SelectByName(name);
         Integer code = offices!=null?Code.GET_OK:Code.GET_ERR;
         String msg = offices!=null?"Successfully!":"NULL";
-        return new Result(code,msg,offices);
+        return new Result(code,msg,offices,1);
     }
     @GetMapping("/id/{id}")
     public Result selectId(@PathVariable Long id){
         Offices offices = officesService.selectById(id);
         Integer code = offices!=null?Code.GET_OK:Code.GET_ERR;
         String msg = offices!=null?"Successfully!":"NULL";
-        return new Result(code,msg,offices);
+        return new Result(code,msg,offices,1);
     }
     //todo 双击选中单词 三击选中整行
     @GetMapping
@@ -54,7 +54,7 @@ public class OfficesController {
         List<Offices> officesList = officesService.SelectAll();
         Integer code = officesList!=null?Code.GET_OK:Code.GET_ERR;
         String msg = officesList!=null?"Successfully!":"查询失败";
-        return new Result(code,msg,officesList);
+        return new Result(code,msg,officesList,1);
     }
     @GetMapping("/gs")
     public Result selectAllgs(){
@@ -73,7 +73,7 @@ public class OfficesController {
         }
         Integer code = officesList!=null?Code.GET_OK:Code.GET_ERR;
         String msg = officesList!=null?"Successfully!":"查询失败";
-        return new Result(code,msg,officesList);
+        return new Result(code,msg,officesList,1);
     }
     @GetMapping("/count")
     public Result countUsers(){
