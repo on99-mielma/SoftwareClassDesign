@@ -15,4 +15,6 @@ public interface OfficesService {
     public Offices selectById(Long id);
 
     public Long countOffices();
+
+    public List<Offices> LikeName(Offices offices);
 }

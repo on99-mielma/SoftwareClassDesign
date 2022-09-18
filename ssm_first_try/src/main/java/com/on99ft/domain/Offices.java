@@ -3,6 +3,11 @@ package com.on99ft.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.web.util.pattern.PathPattern;
+
+import java.beans.Transient;
+import java.util.List;
+import java.util.Map;
 
 @TableName("offices")
 public class Offices {
@@ -16,6 +21,17 @@ public class Offices {
     //private String doctor;
     @TableField(value = "officeInfo")
     private String officeInfo;
+
+    @TableField(exist = false)
+    private Map<Integer, List<Doctor>> DoctorInOffice;//0-6早上 10-16下午 20-26晚上
+
+    public Map<Integer, List<Doctor>> getDoctorInOffice() {
+        return DoctorInOffice;
+    }
+
+    public void setDoctorInOffice(Map<Integer, List<Doctor>> doctorInOffice) {
+        DoctorInOffice = doctorInOffice;
+    }
 
     @Override
     public String toString() {

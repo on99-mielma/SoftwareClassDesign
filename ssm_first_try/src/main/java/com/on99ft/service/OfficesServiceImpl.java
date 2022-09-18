@@ -2,9 +2,9 @@ package com.on99ft.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.on99ft.dao.OfficesDao;
 import com.on99ft.domain.Offices;
-import com.on99ft.domain.QueueReg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +47,11 @@ public class OfficesServiceImpl implements OfficesService {
 
     public Offices selectById(Long id) {
         return officesDao.selectById(id);
+    }
+
+    public List<Offices> LikeName(Offices offices) {
+        QueryWrapper<Offices> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(offices.getOfficeName()),"officeName",offices.getOfficeName());
+        return officesDao.selectList(queryWrapper);
     }
 }

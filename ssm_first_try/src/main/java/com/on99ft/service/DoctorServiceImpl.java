@@ -1,6 +1,8 @@
 package com.on99ft.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.on99ft.dao.DoctorDao;
 import com.on99ft.domain.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,26 @@ public class DoctorServiceImpl implements DoctorService{
     public Long countDoctor() {
         QueryWrapper<Doctor> queryWrapper = new QueryWrapper<Doctor>();
         return doctorDao.selectCount(queryWrapper);
+    }
+
+    public List<Doctor> LikeNameAndOffice(Doctor d) {
+        QueryWrapper<Doctor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(d.getName()),"name",d.getName());
+        queryWrapper.like(StringUtils.isNotBlank(d.getOffice()),"office",d.getOffice());
+        return doctorDao.selectList(queryWrapper);
+    }
+
+    public List<Doctor> WhereOffice(String o) {
+        LambdaQueryWrapper<Doctor> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Doctor::getOffice,o);
+        List<Doctor> doctorList = doctorDao.selectList(lqw);
+        return doctorList;
+    }
+
+    public List<Doctor> LikeSkillandInfo(Doctor d) {
+        QueryWrapper<Doctor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(d.getSkill()),"skill",d.getSkill());
+        queryWrapper.like(StringUtils.isNotBlank(d.getInfo()),"info",d.getInfo());
+        return doctorDao.selectList(queryWrapper);
     }
 }

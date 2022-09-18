@@ -44,17 +44,17 @@ public class DoctorController {
     @GetMapping("/{id}")
     public Result getByid(@PathVariable Long id){
         Doctor k = doctorService.getById(id);
-        Integer code = k!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = k!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
         String msg = k!=null?"Yes":"No";
-        return new Result(code,msg,k,0);
+        return new Result(code,msg,k);
     }
 
     @GetMapping
     public Result getAll(){
         List<Doctor> knowledgeList = doctorService.getAll();
-        Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = knowledgeList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
         String msg = knowledgeList!=null?"Yes":"No";
-        return new Result(code,msg,knowledgeList,0);
+        return new Result(code,msg,knowledgeList);
     }
     @GetMapping(value = "/gs")
     public Result getAllgs(){
@@ -74,9 +74,9 @@ public class DoctorController {
                 d.setInfo(d.getInfo().substring(0,8));
             }
         }
-        Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = knowledgeList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
         String msg = knowledgeList!=null?"Yes":"No";
-        return new Result(code,msg,knowledgeList,0);
+        return new Result(code,msg,knowledgeList);
     }
 
     @DeleteMapping("/{id}")
@@ -117,5 +117,21 @@ public class DoctorController {
     @GetMapping("/count")
     public Result countUsers(){
         return new Result(Code.GET_OK,"^^",doctorService.countDoctor());
+    }
+
+    @GetMapping("/LNAO")
+    public Result LikeNameAndOffice(@RequestBody Doctor d){
+        List<Doctor> doctorList = doctorService.LikeNameAndOffice(d);
+        Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
+        String msg = doctorList!=null?"Yes":"No";
+        return new Result(code,msg,doctorList);
+    }
+
+    @GetMapping("/LSAI")
+    public Result LikeSkillAndInfo(@RequestBody Doctor d){
+        List<Doctor> doctorList = doctorService.LikeSkillandInfo(d);
+        Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
+        String msg = doctorList!=null?"Yes":"No";
+        return new Result(code,msg,doctorList);
     }
 }

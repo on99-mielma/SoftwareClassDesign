@@ -2,12 +2,19 @@ package com.on99ft.Controller;
 
 
 import com.on99ft.domain.Article;
+import com.on99ft.domain.Doctor;
+import com.on99ft.domain.Dtt;
 import com.on99ft.domain.Offices;
+import com.on99ft.service.DoctorService;
+import com.on99ft.service.DttService;
 import com.on99ft.service.OfficesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -15,6 +22,12 @@ import java.util.List;
 public class OfficesController {
     @Autowired
     private OfficesService officesService;
+
+    @Autowired
+    private DoctorService doctorService;
+
+    @Autowired
+    private DttService dttService;
 
     @PostMapping("/insert")
     public Result insert(@RequestBody Offices offices){
@@ -37,24 +50,24 @@ public class OfficesController {
     @GetMapping("/{name}")
     public Result selectName(@PathVariable String name){
         Offices offices = officesService.SelectByName(name);
-        Integer code = offices!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = offices!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
         String msg = offices!=null?"Successfully!":"NULL";
-        return new Result(code,msg,offices,1);
+        return new Result(code,msg,offices);
     }
     @GetMapping("/id/{id}")
     public Result selectId(@PathVariable Long id){
         Offices offices = officesService.selectById(id);
-        Integer code = offices!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = offices!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
         String msg = offices!=null?"Successfully!":"NULL";
-        return new Result(code,msg,offices,1);
+        return new Result(code,msg,offices);
     }
     //todo 双击选中单词 三击选中整行
     @GetMapping
     public Result selectAll(){
         List<Offices> officesList = officesService.SelectAll();
-        Integer code = officesList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = officesList!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
         String msg = officesList!=null?"Successfully!":"查询失败";
-        return new Result(code,msg,officesList,1);
+        return new Result(code,msg,officesList);
     }
     @GetMapping("/gs")
     public Result selectAllgs(){
@@ -71,12 +84,86 @@ public class OfficesController {
                 o.setOfficeInfo(o.getOfficeInfo().substring(0,15));
             }
         }
-        Integer code = officesList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = officesList!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
         String msg = officesList!=null?"Successfully!":"查询失败";
-        return new Result(code,msg,officesList,1);
+        return new Result(code,msg,officesList);
     }
     @GetMapping("/count")
     public Result countUsers(){
         return new Result(Code.GET_OK,"^^",officesService.countOffices());
+    }
+
+    @GetMapping("LOAD")
+    public Result LikeOfficeAndDoctor(@RequestBody Offices offices){//0-6早上 10-16下午 20-26晚上
+        List<Offices> officesList = officesService.LikeName(offices);
+        if(officesList==null){
+            return new Result(Code.GET_OFFICES_ERR,"关键词查询无结果",officesList);
+        }
+        for (Offices o: officesList) {
+            Map<Integer,List<Doctor>> TMapIL = new HashMap<>();
+            List<Doctor> doctorList = doctorService.WhereOffice(o.getOfficeName());
+            if(doctorList==null){
+                continue;
+            }
+            else{
+                for (Doctor d: doctorList) {
+                    Dtt dtt = dttService.selectOne(d.getId());
+                    String[] morning = dtt.getMorning().split("/");
+                    System.out.println("morning = " + morning);
+                    for (int i = 0; i < morning.length; i++) {
+                        String tmp = morning[i];
+                        if("0".equals(tmp)){
+                            continue;
+                        }
+                        else{
+                            if(TMapIL.containsKey(i)){
+                                TMapIL.get(i).add(d);
+                            }
+                            else {
+                                List<Doctor> doctors = new ArrayList<>();
+                                doctors.add(d);
+                                TMapIL.put(i,doctors);
+                            }
+                        }
+                    }
+                    String[] afternoon = dtt.getAfternoon().split("/");
+                    for (int i = 0; i < afternoon.length; i++) {
+                        String tmp = afternoon[i];
+                        if("0".equals(tmp)){
+                            continue;
+                        }
+                        else{
+                            if(TMapIL.containsKey(i+10)){
+                                TMapIL.get(i+10).add(d);
+                            }
+                            else {
+                                List<Doctor> doctors = new ArrayList<>();
+                                doctors.add(d);
+                                TMapIL.put(i+10,doctors);
+                            }
+                        }
+                    }
+                    String[] night = dtt.getNight().split("/");
+                    for (int i = 0; i < night.length; i++) {
+                        String tmp = night[i];
+                        if("0".equals(tmp)){
+                            continue;
+                        }
+                        else{
+                            if(TMapIL.containsKey(i+20)){
+                                TMapIL.get(i+20).add(d);
+                            }
+                            else {
+                                List<Doctor> doctors = new ArrayList<>();
+                                doctors.add(d);
+                                TMapIL.put(i+20,doctors);
+                            }
+                        }
+                    }
+                }
+            }
+        o.setDoctorInOffice(TMapIL);
+        }
+        return new Result(Code.GET_OFFICES_OK,"结果如下",officesList);
     }
 }

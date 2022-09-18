@@ -4,6 +4,10 @@ public class Code {
     public static final Integer SAVE_OK = 10011;
     public static final Integer DELETE_OK = 20021;
     public static final Integer GET_OK = 30031;
+    public static final Integer GET_OFFICES_OK = 300311;
+    public static final Integer GET_OFFICES_ERR = 300310;
+    public static final Integer GET_DOCTOR_OK = 300321;
+    public static final Integer GET_DOCTOR_ERR = 300320;
     public static final Integer UPDATE_OK = 40041;
 
     public static final Integer SAVE_ERR = 10010;
@@ -17,4 +21,5 @@ public class Code {
 
     public static final String SDELETE_OK = "删除成功";
     public static final String SDELETE_ERR = "删除失败，请检查JSON数据或ID";
+
 }
