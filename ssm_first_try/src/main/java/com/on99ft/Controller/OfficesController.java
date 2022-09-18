@@ -109,7 +109,7 @@ public class OfficesController {
                 for (Doctor d: doctorList) {
                     Dtt dtt = dttService.selectOne(d.getId());
                     String[] morning = dtt.getMorning().split("/");
-                    System.out.println("morning = " + morning);
+/*                    System.out.println("morning = " + morning);*/
                     for (int i = 0; i < morning.length; i++) {
                         String tmp = morning[i];
                         if("0".equals(tmp)){
