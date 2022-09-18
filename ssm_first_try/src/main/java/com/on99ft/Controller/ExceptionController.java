@@ -12,13 +12,13 @@ public class ExceptionController {
     @ExceptionHandler(NumberFormatException.class)
     public Result GetIdException(NumberFormatException gie){
         System.out.println("gie = " + gie);
-        return new Result(Code.NUMBER_ERR,"请检查输入的格式!",null);
+        return new Result(Code.NUMBER_ERR," 请检查输入的格式! ",null);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result DeleteMethodException(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException){
-        System.out.println("httpRequestMethodNotSupportedException = " + httpRequestMethodNotSupportedException);
-        return new Result(Code.METHOD_ERR,"方法错误!",null);
+        System.out.println("httpRequestMethodNotSupportedException  = " + httpRequestMethodNotSupportedException);
+        return new Result(Code.METHOD_ERR," 方法错误! ",null);
     }
 
     @ExceptionHandler(SQLSyntaxErrorException.class)
