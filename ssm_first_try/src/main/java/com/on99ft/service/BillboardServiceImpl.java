@@ -34,7 +34,7 @@ public class BillboardServiceImpl implements BillboardService {
 
     public List<Billboard> selectAll() {
         QueryWrapper<Billboard> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("date");
         return billboardDao.selectList(queryWrapper);
     }
 
@@ -45,7 +45,7 @@ public class BillboardServiceImpl implements BillboardService {
 
     public List<Billboard> selectWithLimit(Long cur, Long size) {
         QueryWrapper<Billboard> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("date");
         IPage<Billboard> page = billboardDao.selectPage(new Page<>(cur,size),queryWrapper);
         return page.getRecords();
     }

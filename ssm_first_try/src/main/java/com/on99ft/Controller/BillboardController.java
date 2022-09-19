@@ -1,10 +1,12 @@
 package com.on99ft.Controller;
 
+import com.on99ft.domain.Article;
 import com.on99ft.domain.Billboard;
 import com.on99ft.service.BillboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -91,5 +93,37 @@ public class BillboardController {
     @GetMapping("/count")
     public Result countUsers(){
         return new Result(Code.GET_OK,"^^",billboardService.countBillboard());
+    }
+
+    @GetMapping("/2d/{size}")
+    public Result select2D(@PathVariable Long size){//size表示一组多少个
+        List<Billboard> billboardList = billboardService.selectAll();
+        Integer code = billboardList!=null?Code.GET_OK:Code.GET_ERR;
+        String msg = billboardList!=null?"Successfully!":"查询失败";
+        if(billboardList==null){
+            return new Result(code,msg,null);
+        }
+        ArrayList<List<Billboard>> resultList = new ArrayList<>();
+        Long i=0L;
+        List<Billboard> tempList = new ArrayList<>();
+        for (Billboard w: billboardList) {
+            if(i.equals(size)){
+                i=0L;
+                resultList.add(tempList);
+                tempList=new ArrayList<>();
+            }
+            if(w.getText()==null||("".equals(w.getText()))){
+                w.setText("无");
+            }
+            if(w.getText().length()>=15){
+                w.setText(w.getText().substring(0,15));
+            }
+            i+=1L;
+            tempList.add(w);
+        }
+        if(!tempList.isEmpty()){
+            resultList.add(tempList);
+        }
+        return new Result(code,msg,resultList);
     }
 }

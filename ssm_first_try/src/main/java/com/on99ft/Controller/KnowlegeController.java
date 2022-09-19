@@ -1,10 +1,12 @@
 package com.on99ft.Controller;
 
+import com.on99ft.domain.Article;
 import com.on99ft.domain.Knowledge;
 import com.on99ft.service.KnowledgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -90,4 +92,36 @@ public class KnowlegeController {
         return new Result(code,msg,knowledgeList);
     }
 
+
+    @GetMapping("/2d/{size}")
+    public Result select2D(@PathVariable Long size){//size表示一组多少个
+        List<Knowledge> knowledgeList = knowledgeService.getAll();
+        Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
+        String msg = knowledgeList!=null?"Successfully!":"查询失败";
+        if(knowledgeList==null){
+            return new Result(code,msg,null);
+        }
+        ArrayList<List<Knowledge>> resultList = new ArrayList<>();
+        Long i=0L;
+        List<Knowledge> tempList = new ArrayList<>();
+        for (Knowledge w: knowledgeList) {
+            if(i.equals(size)){
+                i=0L;
+                resultList.add(tempList);
+                tempList=new ArrayList<>();
+            }
+            if(w.getText()==null||("".equals(w.getText()))){
+                w.setText("无");
+            }
+            if(w.getText().length()>=15){
+                w.setText(w.getText().substring(0,15));
+            }
+            i+=1L;
+            tempList.add(w);
+        }
+        if(!tempList.isEmpty()){
+            resultList.add(tempList);
+        }
+        return new Result(code,msg,resultList);
+    }
 }

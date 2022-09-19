@@ -17,7 +17,7 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 
     public List<Knowledge> getAll() {
         QueryWrapper<Knowledge> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("date");
         return knowledgeDao.selectList(queryWrapper);
     }
 
@@ -45,7 +45,7 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 
     public List<Knowledge> selectWithLimit(Long cur, Long size) {
         QueryWrapper<Knowledge> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("date");
         IPage<Knowledge> page = knowledgeDao.selectPage(new Page<Knowledge>(cur,size),queryWrapper);
         return page.getRecords();
     }

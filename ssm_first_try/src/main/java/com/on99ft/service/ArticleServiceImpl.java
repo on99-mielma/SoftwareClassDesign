@@ -34,7 +34,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     public List<Article> selectAll() {
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("date");
         return articleDao.selectList(queryWrapper);
     }
 
@@ -45,7 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     public List<Article> selectWithLimit(Long cur, Long size) {
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("date");
         IPage<Article> page = articleDao.selectPage(new Page<>(cur,size),queryWrapper);
         return page.getRecords();
     }

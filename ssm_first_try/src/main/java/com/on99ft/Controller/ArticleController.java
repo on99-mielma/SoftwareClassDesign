@@ -5,6 +5,7 @@ import com.on99ft.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -91,5 +92,37 @@ public class ArticleController {
     @GetMapping("/count")
     public Result countUsers(){
         return new Result(Code.GET_OK,"^^",articleService.countArticle());
+    }
+
+    @GetMapping("/2d/{size}")
+    public Result select2D(@PathVariable Long size){//size表示一组多少个
+        List<Article> articleList = articleService.selectAll();
+        Integer code = articleList!=null?Code.GET_OK:Code.GET_ERR;
+        String msg = articleList!=null?"Successfully!":"查询失败";
+        if(articleList==null){
+            return new Result(code,msg,null);
+        }
+        ArrayList<List<Article>> resultList = new ArrayList<>();
+        Long i=0L;
+        List<Article> tempList = new ArrayList<>();
+        for (Article w: articleList) {
+            if(i.equals(size)){
+               i=0L;
+               resultList.add(tempList);
+               tempList=new ArrayList<>();
+            }
+            if(w.getText()==null||("".equals(w.getText()))){
+                w.setText("无");
+            }
+            if(w.getText().length()>=15){
+                w.setText(w.getText().substring(0,15));
+            }
+            i+=1L;
+            tempList.add(w);
+        }
+        if(!tempList.isEmpty()){
+            resultList.add(tempList);
+        }
+        return new Result(code,msg,resultList);
     }
 }
