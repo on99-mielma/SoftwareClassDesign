@@ -11,4 +11,6 @@ public interface ArticleService {
     public Article selectId(Long id);
     public List<Article> selectAll();
     public Long countArticle();
+
+    public List<Article> selectWithLimit(Long cur,Long size);
 }

@@ -1,6 +1,8 @@
 package com.on99ft.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.on99ft.dao.KnowledgeDao;
 import com.on99ft.domain.Knowledge;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +36,17 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 
     public Integer delete(Long id){
         return knowledgeDao.deleteById(id);
+    }
+
+    public Long countKnowledge() {
+        QueryWrapper<Knowledge> q = new QueryWrapper<>();
+        return knowledgeDao.selectCount(q);
+    }
+
+    public List<Knowledge> selectWithLimit(Long cur, Long size) {
+        QueryWrapper<Knowledge> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        IPage<Knowledge> page = knowledgeDao.selectPage(new Page<Knowledge>(cur,size),queryWrapper);
+        return page.getRecords();
     }
 }

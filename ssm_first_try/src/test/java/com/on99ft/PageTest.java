@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.on99ft.dao.UserDao;
+import com.on99ft.domain.Knowledge;
 import com.on99ft.domain.User;
+import com.on99ft.service.KnowledgeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +20,9 @@ public class PageTest {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private KnowledgeService knowledgeService;
+
     @Test
     void testPage1(){
         //todo 分页实例
@@ -28,6 +33,15 @@ public class PageTest {
         System.out.println("一共多少页"+page.getPages());
         System.out.println("一共多少条"+page.getTotal());
         System.out.println("页数据"+page.getRecords());
+    }
+
+    @Test
+    void testPage2(){
+        List<Knowledge> knowledgeList = knowledgeService.selectWithLimit(5L,3L);
+        for (Knowledge k:
+             knowledgeList) {
+            System.out.println("k = " + k);
+        }
     }
 
     @Test

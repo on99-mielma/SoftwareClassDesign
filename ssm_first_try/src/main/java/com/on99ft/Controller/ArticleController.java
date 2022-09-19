@@ -68,18 +68,16 @@ public class ArticleController {
         return new Result(code,msg,articleList);
     }
 
-    @GetMapping("/gs3")
-    public Result selectBF3(){
-        List<Article> articleList = articleService.selectAll();
+    @GetMapping("/gs/{cur}/{size}")
+    public Result selectBF3(@PathVariable Long cur,@PathVariable Long size){
+        List<Article> articleList = articleService.selectWithLimit(cur,size);
         Integer code = articleList!=null?Code.GET_OK:Code.GET_ERR;
         String msg = articleList!=null?"Successfully!":"查询失败";
         if(articleList==null){
             return new Result(code,msg,null);
         }
-        int alen = Math.min(articleList.size(),3);
-        List<Article> articleList1 = articleList.subList(0,alen);
         for (Article w:
-                articleList1) {
+                articleList) {
             if(w.getText()==null||("".equals(w.getText()))){
                 w.setText("无");
             }
@@ -87,7 +85,7 @@ public class ArticleController {
                 w.setText(w.getText().substring(0,15));
             }
         }
-        return new Result(code,msg,articleList1);
+        return new Result(code,msg,articleList);
     }
 
     @GetMapping("/count")

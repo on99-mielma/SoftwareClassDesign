@@ -17,9 +17,13 @@ public class Code {
 
     public static final Integer GET_BILLBOARD_ERR = 330340;
 
-    public static final Integer GET_NEWS_OK = 330350;
+    public static final Integer GET_NEWS_OK = 330351;
 
     public static final Integer GET_NEWS_ERR = 330350;
+
+    public static final Integer GET_KNOWLEDGE_OK = 330361;
+
+    public static final Integer GET_KNOWLEDGE_ERR = 330360;
 
     public static final Integer UPDATE_OK = 40041;
 

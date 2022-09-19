@@ -13,4 +13,8 @@ public interface KnowledgeService {
 
     public Integer delete(Long id);
 
+    public Long countKnowledge();
+
+    public List<Knowledge> selectWithLimit(Long cur,Long size);
+
 }
