@@ -30,7 +30,7 @@ public class KnowlegeController {
     @GetMapping("/{id}")
     public Result getByid(@PathVariable Long id){
         Knowledge k = knowledgeService.getById(id);
-        Integer code = k!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = k!=null?Code.GET_KNOWLEDGE_OK:Code.GET_KNOWLEDGE_ERR;
         String msg = k!=null?"Yes":"No";
         return new Result(code,msg,k);
     }
@@ -38,7 +38,7 @@ public class KnowlegeController {
     @GetMapping
     public Result getAll(){
         List<Knowledge> knowledgeList = knowledgeService.getAll();
-        Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = knowledgeList!=null?Code.GET_KNOWLEDGE_OK:Code.GET_KNOWLEDGE_ERR;
         String msg = knowledgeList!=null?"Yes":"No";
         return new Result(code,msg,knowledgeList);
     }
@@ -51,7 +51,7 @@ public class KnowlegeController {
 
     @GetMapping("/count")
     public Result countKnowledge(){
-        return new Result(Code.GET_OK,"^^",knowledgeService.countKnowledge());
+        return new Result(Code.GET_KNOWLEDGE_OK,"^^",knowledgeService.countKnowledge());
     }
 
     @GetMapping("/gs")
@@ -96,7 +96,7 @@ public class KnowlegeController {
     @GetMapping("/2d/{size}")
     public Result select2D(@PathVariable Long size){//size表示一组多少个
         List<Knowledge> knowledgeList = knowledgeService.getAll();
-        Integer code = knowledgeList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = knowledgeList!=null?Code.GET_KNOWLEDGE_OK:Code.GET_KNOWLEDGE_ERR;
         String msg = knowledgeList!=null?"Successfully!":"查询失败";
         if(knowledgeList==null){
             return new Result(code,msg,null);

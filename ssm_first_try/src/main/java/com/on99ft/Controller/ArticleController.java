@@ -36,7 +36,7 @@ public class ArticleController {
     @GetMapping("/{id}")
     public Result selectId(@PathVariable Long id){
         Article article = articleService.selectId(id);
-        Integer code = article!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = article!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
         String msg = article!=null?"Successfully!":"查询失败";
         return new Result(code,msg,article);
     }
@@ -44,7 +44,7 @@ public class ArticleController {
     @GetMapping
     public Result selectAll(){
         List<Article> articleList = articleService.selectAll();
-        Integer code = articleList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = articleList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
         String msg = articleList!=null?"Successfully!":"查询失败";
         return new Result(code,msg,articleList);
     }
@@ -52,7 +52,7 @@ public class ArticleController {
     @GetMapping("/gs")
     public Result selectBF(){
         List<Article> articleList = articleService.selectAll();
-        Integer code = articleList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = articleList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
         String msg = articleList!=null?"Successfully!":"查询失败";
         if(articleList==null){
             return new Result(code,msg,null);
@@ -72,7 +72,7 @@ public class ArticleController {
     @GetMapping("/gs/{cur}/{size}")
     public Result selectBF3(@PathVariable Long cur,@PathVariable Long size){
         List<Article> articleList = articleService.selectWithLimit(cur,size);
-        Integer code = articleList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = articleList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
         String msg = articleList!=null?"Successfully!":"查询失败";
         if(articleList==null){
             return new Result(code,msg,null);
@@ -91,13 +91,13 @@ public class ArticleController {
 
     @GetMapping("/count")
     public Result countUsers(){
-        return new Result(Code.GET_OK,"^^",articleService.countArticle());
+        return new Result(Code.GET_ARTICLE_OK,"^^",articleService.countArticle());
     }
 
     @GetMapping("/2d/{size}")
     public Result select2D(@PathVariable Long size){//size表示一组多少个
         List<Article> articleList = articleService.selectAll();
-        Integer code = articleList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = articleList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
         String msg = articleList!=null?"Successfully!":"查询失败";
         if(articleList==null){
             return new Result(code,msg,null);

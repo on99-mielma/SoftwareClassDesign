@@ -37,7 +37,7 @@ public class BillboardController {
     @GetMapping("/{id}")
     public Result selectId(@PathVariable Long id){
         Billboard billboard = billboardService.selectById(id);
-        Integer code = billboard!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = billboard!=null?Code.GET_BILLBOARD_OK:Code.GET_BILLBOARD_ERR;
         String msg = billboard!=null?"Successfully!":"查询失败";
         return new Result(code,msg,billboard);
     }
@@ -45,7 +45,7 @@ public class BillboardController {
     @GetMapping
     public Result selectAll(){
         List<Billboard> billboardList = billboardService.selectAll();
-        Integer code = billboardList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = billboardList!=null?Code.GET_BILLBOARD_OK:Code.GET_BILLBOARD_ERR;
         String msg = billboardList!=null?"Successfully!":"查询失败";
         return new Result(code,msg,billboardList);
     }
@@ -53,7 +53,7 @@ public class BillboardController {
     @GetMapping("/gs")
     public Result selectBF(){
         List<Billboard> billboardList = billboardService.selectAll();
-        Integer code = billboardList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = billboardList!=null?Code.GET_BILLBOARD_OK:Code.GET_BILLBOARD_ERR;
         String msg = billboardList!=null?"Successfully!":"查询失败";
         if(billboardList==null){
             return new Result(code,msg,null);
@@ -73,7 +73,7 @@ public class BillboardController {
     @GetMapping("/gs/{cur}/{size}")
     public Result selectBF3(@PathVariable Long cur,@PathVariable Long size){
         List<Billboard> billboardList = billboardService.selectWithLimit(cur,size);
-        Integer code = billboardList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = billboardList!=null?Code.GET_BILLBOARD_OK:Code.GET_BILLBOARD_ERR;
         String msg = billboardList!=null?"Successfully!":"查询失败";
         if(billboardList==null){
             return new Result(code,msg,null);
@@ -92,13 +92,13 @@ public class BillboardController {
 
     @GetMapping("/count")
     public Result countUsers(){
-        return new Result(Code.GET_OK,"^^",billboardService.countBillboard());
+        return new Result(Code.GET_BILLBOARD_OK,"^^",billboardService.countBillboard());
     }
 
     @GetMapping("/2d/{size}")
     public Result select2D(@PathVariable Long size){//size表示一组多少个
         List<Billboard> billboardList = billboardService.selectAll();
-        Integer code = billboardList!=null?Code.GET_OK:Code.GET_ERR;
+        Integer code = billboardList!=null?Code.GET_BILLBOARD_OK:Code.GET_BILLBOARD_ERR;
         String msg = billboardList!=null?"Successfully!":"查询失败";
         if(billboardList==null){
             return new Result(code,msg,null);
