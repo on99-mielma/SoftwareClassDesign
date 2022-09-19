@@ -91,6 +91,33 @@ public class OfficesController {
         }
         return new Result(code,msg,officesList);
     }
+
+    @GetMapping("/2d/{size}")
+    public Result select2D(@PathVariable Long size){//size表示一组多少个
+        List<Offices> officesList = officesService.SelectAll();
+        Integer code = officesList!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
+        String msg = officesList!=null?"Successfully!":"查询失败";
+        if(officesList==null){
+            return new Result(code,msg,null);
+        }
+        ArrayList<List<Offices>> resultList = new ArrayList<>();
+        Long i=0L;
+        List<Offices> tempList = new ArrayList<>();
+        for (Offices w: officesList) {
+            if(i.equals(size)){
+                i=0L;
+                resultList.add(tempList);
+                tempList=new ArrayList<>();
+            }
+            i+=1L;
+            tempList.add(w);
+        }
+        if(!tempList.isEmpty()){
+            resultList.add(tempList);
+        }
+        return new Result(code,msg,resultList);
+    }
+
     @GetMapping("/count")
     public Result countUsers(){
         return new Result(Code.GET_OK,"^^",officesService.countOffices());
