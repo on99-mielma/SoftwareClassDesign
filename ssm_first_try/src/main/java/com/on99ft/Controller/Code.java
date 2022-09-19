@@ -4,10 +4,23 @@ public class Code {
     public static final Integer SAVE_OK = 10011;
     public static final Integer DELETE_OK = 20021;
     public static final Integer GET_OK = 30031;
-    public static final Integer GET_OFFICES_OK = 300311;
-    public static final Integer GET_OFFICES_ERR = 300310;
-    public static final Integer GET_DOCTOR_OK = 300321;
-    public static final Integer GET_DOCTOR_ERR = 300320;
+    public static final Integer GET_OFFICES_OK = 330311;
+    public static final Integer GET_OFFICES_ERR = 330310;
+    public static final Integer GET_DOCTOR_OK = 330321;
+    public static final Integer GET_DOCTOR_ERR = 330320;
+
+    public static final Integer GET_ARTICLE_OK = 330331;
+
+    public static final Integer GET_ARTICLE_ERR = 330330;
+
+    public static final Integer GET_BILLBOARD_OK = 330341;
+
+    public static final Integer GET_BILLBOARD_ERR = 330340;
+
+    public static final Integer GET_NEWS_OK = 330350;
+
+    public static final Integer GET_NEWS_ERR = 330350;
+
     public static final Integer UPDATE_OK = 40041;
 
     public static final Integer SAVE_ERR = 10010;
