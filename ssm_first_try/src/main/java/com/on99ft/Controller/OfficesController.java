@@ -72,6 +72,11 @@ public class OfficesController {
     @GetMapping("/gs")
     public Result selectAllgs(){
         List<Offices> officesList = officesService.SelectAll();
+        Integer code = officesList!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
+        String msg = officesList!=null?"Successfully!":"查询失败";
+        if(officesList==null){
+            return new Result(code,msg,null);
+        }
         for (Offices o:
              officesList) {
             if(o.getOfficeInfo()==null||"".equals(o.getOfficeInfo())){
@@ -84,8 +89,6 @@ public class OfficesController {
                 o.setOfficeInfo(o.getOfficeInfo().substring(0,15));
             }
         }
-        Integer code = officesList!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
-        String msg = officesList!=null?"Successfully!":"查询失败";
         return new Result(code,msg,officesList);
     }
     @GetMapping("/count")
