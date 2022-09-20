@@ -85,6 +85,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#" v-on:click="knowledgeBack();knowledgeIn()">
+                        <i class="mdi mdi-file-find menu-icon"></i>
+                        <span class="menu-title">Knowledge</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" v-on:click="billboardBack();billboardIn()">
+                        <i class="mdi mdi-file-document-box menu-icon"></i>
+                        <span class="menu-title">Billboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#" v-on:click="queueBack();queueIn()">
                         <i class="mdi mdi-stethoscope menu-icon"></i>
                         <span class="menu-title">QueueReg</span>
@@ -165,6 +177,20 @@
                                                 <div class="d-flex flex-column justify-content-around">
                                                     <small class="mb-1 text-muted">Article</small>
                                                     <h5 class="me-2 mb-0">{{this.countAll.countArticle}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-file-find me-3 icon-lg text-primary"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Knowledge</small>
+                                                    <h5 class="me-2 mb-0">{{this.countAll.countKnowledge}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-file-document-box me-3 icon-lg text-primary"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Billboard</small>
+                                                    <h5 class="me-2 mb-0">{{this.countAll.countBillboard}}</h5>
                                                 </div>
                                             </div>
                                             <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
@@ -712,6 +738,262 @@
                                             </div>
                                             <div class="mt-3 form-group template-demo">
                                                 <button type="button" class="btn btn-info btn-lg btn-block" v-on:click="queueInsert">
+                                                    <i class="mdi mdi-upload"></i>
+                                                    Insert
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard  </a> templates</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <div class="main-panel" v-if="showKnowledge"><!--todo knowledge-->
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <div class="d-flex align-items-end flex-wrap">
+                                <div class="me-md-3 me-xl-5">
+                                    <h2>{{this.Msg1}}</h2>
+                                    <p class="mb-md-0">{{this.Msg2}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-end flex-wrap">
+                                <button type="button" class="btn btn-light bg-white btn-icon me-3 d-none d-md-block " v-if="!knowledgeData.knowledgeEdit" v-on:click="knowledgeEditIn()">
+                                    <i class="mdi mdi-note-plus text-muted"></i>
+                                </button>
+                                <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0" v-if="knowledgeData.knowledgeWork||knowledgeData.knowledgeEdit" v-on:click="knowledgeBack()">
+                                    <i class="mdi mdi-undo-variant text-muted"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" v-if="knowledgeData.knowledgeGS">
+                    <div class="row justify-content-between">
+                        <div class="col-md-12 ">
+                            <div class="mb-3 d-flex justify-content-between" style="border-left: 18px solid #26FFDF; background-color: white;" v-for="a in this.knowledgeData.data">
+                                <div class="pe-3 ms-3">
+                                    <h1 class="mb-1 h2 fw-bold mt-2">
+                                        <a class="text-dark" href="#" v-on:click="setOneKnowledge(a.id)">{{a.title}}</a>
+                                    </h1>
+                                    <p>
+                                        {{a.text}}
+                                    </p>
+                                    <div class="card-text text-muted small">{{a.author}}</div>
+                                    <small class="text-muted">{{a.date}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="knowledgeData.knowledgeWork">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body dashboard-tabs p-0">
+                                <ul class="nav nav-tabs px-4" role="tablist" data-bs-target="#knowledgeWork1">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="knowledgeworkInsert-tab" data-bs-toggle="tab" href="#knowledgeworkInsert" role="tab" aria-controls="knowledgeworkInsert" aria-selected="true">Update</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" v-on:click="knowledgeDeleteConfirm()">Delete</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content py-0 px-0" id="knowledgeWork1">
+                                    <div class="tab-pane fade show active" id="knowledgeworkInsert" role="tabpanel" aria-labelledby="knowledgeworkInsert-tab">
+                                        <div class="container">
+                                            <div class="mt-3 form-group">
+                                                <label for="knowledgeUpdateTitle" class="h3">Title</label>
+                                                <input id="knowledgeUpdateTitle" class="form-control" required="required" placeholder="Title" v-bind:value="this.knowledgeData.NeedToUpdateData.data.title">
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="knowledgeUpdateText" class="h3">Text</label><br>
+                                                <textarea id="knowledgeUpdateText" placeholder="Text" required="required" cols="120" rows="30" maxlength="4000" class="fs-5" style="width: 100%;resize: none">{{this.knowledgeData.NeedToUpdateData.data.text}}</textarea>
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="knowledgeUpdateAuthor" class="h3">Author</label>
+                                                <input id="knowledgeUpdateAuthor" class="form-control" required="required" placeholder="Author" v-bind:value="this.knowledgeData.NeedToUpdateData.data.author">
+                                            </div>
+                                            <div class="mt-3 form-group template-demo">
+                                                <button type="button" class="btn btn-info btn-lg btn-block" v-on:click="knowledgeUpdate()">
+                                                    <i class="mdi mdi-upload"></i>
+                                                    UPDATE
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="knowledgeData.knowledgeEdit">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body dashboard-tabs p-0">
+                                <ul class="nav nav-tabs px-4" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="knowledgeinsertE-tab" data-bs-target="#knowledgeEdit1" data-bs-toggle="tab" href="#knowledgeinsertE" role="tab" aria-controls="knowledgeinsertE" aria-selected="true">Update</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content py-0 px-0" id="knowledgeEdit1">
+                                    <div class="tab-pane fade show active" id="knowledgeinsertE" role="tabpanel" aria-labelledby="knowledgeinsertE-tab">
+                                        <div class="container">
+                                            <div class="mt-3 form-group">
+                                                <label for="knowledgeInsertTitle" class="h3">Title</label>
+                                                <input id="knowledgeInsertTitle" class="form-control" placeholder="Title"  required="required">
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="knowledgeInsertText" class="h3">Text</label><br>
+                                                <textarea id="knowledgeInsertText" placeholder="Text" required="required"  cols="120" rows="30" maxlength="4000" class="fs-5" style="width: 100%;resize: none"></textarea>
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="knowledgeInsertAuthor" class="h3">Author</label>
+                                                <input id="knowledgeInsertAuthor" class="form-control" required="required" placeholder="Author">
+                                            </div>
+                                            <div class="mt-3 form-group template-demo">
+                                                <button type="button" class="btn btn-info btn-lg btn-block" v-on:click="knowledgeInsert()">
+                                                    <i class="mdi mdi-upload"></i>
+                                                    Insert
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard  </a> templates</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <div class="main-panel" v-if="showBillboard"><!--todo billboard-->
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <div class="d-flex align-items-end flex-wrap">
+                                <div class="me-md-3 me-xl-5">
+                                    <h2>{{this.Msg1}}</h2>
+                                    <p class="mb-md-0">{{this.Msg2}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-end flex-wrap">
+                                <button type="button" class="btn btn-light bg-white btn-icon me-3 d-none d-md-block " v-if="!billboardData.billboardEdit" v-on:click="billboardEditIn()">
+                                    <i class="mdi mdi-note-plus text-muted"></i>
+                                </button>
+                                <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0" v-if="billboardData.billboardWork||billboardData.billboardEdit" v-on:click="billboardBack()">
+                                    <i class="mdi mdi-undo-variant text-muted"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" v-if="billboardData.billboardGS">
+                    <div class="row justify-content-between">
+                        <div class="col-md-12 ">
+                            <div class="mb-3 d-flex justify-content-between" style="border-left: 18px solid #7681E0; background-color: white;" v-for="a in this.billboardData.data">
+                                <div class="pe-3 ms-3">
+                                    <h1 class="mb-1 h2 fw-bold mt-2">
+                                        <a class="text-dark" href="#" v-on:click="setOneBillboard(a.id)">{{a.title}}</a>
+                                    </h1>
+                                    <p>
+                                        {{a.text}}
+                                    </p>
+                                    <div class="card-text text-muted small">{{a.author}}</div>
+                                    <small class="text-muted">{{a.date}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="billboardData.billboardWork">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body dashboard-tabs p-0">
+                                <ul class="nav nav-tabs px-4" role="tablist" data-bs-target="#billboardWork1">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="billboardworkInsert-tab" data-bs-toggle="tab" href="#billboardworkInsert" role="tab" aria-controls="billboardworkInsert" aria-selected="true">Update</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" v-on:click="billboardDeleteConfirm()">Delete</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content py-0 px-0" id="billboardWork1">
+                                    <div class="tab-pane fade show active" id="billboardworkInsert" role="tabpanel" aria-labelledby="billboardworkInsert-tab">
+                                        <div class="container">
+                                            <div class="mt-3 form-group">
+                                                <label for="billboardUpdateTitle" class="h3">Title</label>
+                                                <input id="billboardUpdateTitle" class="form-control" required="required" placeholder="Title" v-bind:value="this.billboardData.NeedToUpdateData.data.title">
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="billboardUpdateText" class="h3">Text</label><br>
+                                                <textarea id="billboardUpdateText" placeholder="Text" required="required" cols="120" rows="30" maxlength="4000" class="fs-5" style="width: 100%;resize: none">{{this.billboardData.NeedToUpdateData.data.text}}</textarea>
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="billboardUpdateAuthor" class="h3">Author</label>
+                                                <input id="billboardUpdateAuthor" class="form-control" required="required" placeholder="Author" v-bind:value="this.billboardData.NeedToUpdateData.data.author">
+                                            </div>
+                                            <div class="mt-3 form-group template-demo">
+                                                <button type="button" class="btn btn-info btn-lg btn-block" v-on:click="billboardUpdate()">
+                                                    <i class="mdi mdi-upload"></i>
+                                                    UPDATE
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="billboardData.billboardEdit">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body dashboard-tabs p-0">
+                                <ul class="nav nav-tabs px-4" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="billboardinsertE-tab" data-bs-target="#billboardEdit1" data-bs-toggle="tab" href="#billboardinsertE" role="tab" aria-controls="billboardinsertE" aria-selected="true">Update</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content py-0 px-0" id="billboardEdit1">
+                                    <div class="tab-pane fade show active" id="billboardinsertE" role="tabpanel" aria-labelledby="billboardinsertE-tab">
+                                        <div class="container">
+                                            <div class="mt-3 form-group">
+                                                <label for="billboardInsertTitle" class="h3">Title</label>
+                                                <input id="billboardInsertTitle" class="form-control" placeholder="Title"  required="required">
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="billboardInsertText" class="h3">Text</label><br>
+                                                <textarea id="billboardInsertText" placeholder="Text" required="required"  cols="120" rows="30" maxlength="4000" class="fs-5" style="width: 100%;resize: none"></textarea>
+                                            </div>
+                                            <div class="mt-3 form-group">
+                                                <label for="billboardInsertAuthor" class="h3">Author</label>
+                                                <input id="billboardInsertAuthor" class="form-control" required="required" placeholder="Author">
+                                            </div>
+                                            <div class="mt-3 form-group template-demo">
+                                                <button type="button" class="btn btn-info btn-lg btn-block" v-on:click="billboardInsert()">
                                                     <i class="mdi mdi-upload"></i>
                                                     Insert
                                                 </button>

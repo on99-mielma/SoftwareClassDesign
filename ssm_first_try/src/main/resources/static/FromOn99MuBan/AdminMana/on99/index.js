@@ -16,7 +16,9 @@ const App = {
                 countOffices:0,
                 countArticle:0,
                 countQueue:0,
-                countResume:0
+                countResume:0,
+                countKnowledge:0,
+                countBillboard:0
             },
             UserUpdate:true,
             showDashBoard:true,
@@ -26,6 +28,8 @@ const App = {
             showOffices:false,
             showQueue:false,
             showResume:false,
+            showKnowledge:false,
+            showBillboard:false,
             articleData:{
                 code:0,
                 msg:'',
@@ -101,6 +105,34 @@ const App = {
                 code:0,
                 msg:"",
                 data:[]
+            },
+            knowledgeData:{
+                code:0,
+                msg:'',
+                data:[],
+                knowledgeGS:true,
+                knowledgeWork:false,
+                knowledgeEdit:false,
+                NeedToUpdateData:{
+                    code:0,
+                    msg:'',
+                    data:"",
+                },
+                ChangedId:0
+            },
+            billboardData:{
+                code:0,
+                msg:'',
+                data:[],
+                billboardGS:true,
+                billboardWork:false,
+                billboardEdit:false,
+                NeedToUpdateData:{
+                    code:0,
+                    msg:'',
+                    data:"",
+                },
+                ChangedId:0
             }
         }
     },
@@ -128,6 +160,8 @@ const App = {
                         this.showQueue=false;
                         this.showResume=false;
                         this.showArticle=false;
+                        this.showBillboard=false;
+                        this.showKnowledge=false;
                         window.location.href="login.html";
                     }
                     else{
@@ -209,6 +243,24 @@ const App = {
                     console.log(res.data.data);
                 })
             },
+            getCountOfKnowledge() {
+                axios({
+                    url:url+'knowledge'+'/count/',
+                    method:"GET"
+                }).then((res)=>{
+                    this.countAll.countKnowledge=res.data.data;
+                    console.log(res.data.data);
+                })
+            },
+            getCountOfBillboard(){
+                axios({
+                    url:url+'billboard'+'/count/',
+                    method:"GET"
+                }).then((res)=>{
+                    this.countAll.countBillboard=res.data.data;
+                    console.log("billboard count: "+res.data.data);
+                })
+            },
             /*todo article js*/
             getAllArticle() {
                 axios({
@@ -256,6 +308,8 @@ const App = {
             articleIn() {
                 this.Msg2 = "处理文章";
                 this.getAllArticle();
+                this.showBillboard=false;
+                this.showKnowledge=false;
                 this.showDashBoard=false;
                 this.showUsers=false;
                 this.showDoctor=false;
@@ -391,6 +445,8 @@ const App = {
             dashBoardIn () {
                 this.Msg2 = "Your analytics dashboard AdminMana.";
                 this.showDashBoard=true;
+                this.showBillboard=false;
+                this.showKnowledge=false;
                 this.showUsers=false;
                 this.showDoctor=false;
                 this.showOffices=false;
@@ -407,6 +463,8 @@ const App = {
             /*todo doctor js*/
             doctorIn (){
                 this.Msg2 = "Doctor management";
+                this.showBillboard=false;
+                this.showKnowledge=false;
                 this.showDashBoard=false;
                 this.showUsers=false;
                 this.showDoctor=true;
@@ -585,6 +643,8 @@ const App = {
             /*todo queue js*/
             queueIn(){/* change */
                 this.Msg2 = "Queue management";/* change */
+                this.showBillboard=false;
+                this.showKnowledge=false;
                 this.showDashBoard=false;
                 this.showUsers=false;
                 this.showDoctor=false;
@@ -773,6 +833,8 @@ const App = {
             /*todo offices js */
             officesIn(){/* change */
                 this.Msg2 = "Offices management";/* change */
+                this.showBillboard=false;
+                this.showKnowledge=false;
                 this.showDashBoard=false;
                 this.showUsers=false;
                 this.showDoctor=false;
@@ -941,7 +1003,371 @@ const App = {
                     this.officesData.officesEdit = false ;/* change */
                     this.getAllOffices();/* change */
                 })
+            },
+            /*todo knowledge js*/
+        knowledgeIn(){/* change */
+            this.Msg2 = "Knowledge management";/* change */
+            this.showBillboard=false;
+            this.showKnowledge=true;/* change */
+            this.showDashBoard=false;
+            this.showUsers=false;
+            this.showDoctor=false;
+            this.showOffices=false;
+            this.showQueue=false;
+            this.showResume=false;
+            this.showArticle=false;
+            this.getAllKnowledge();/* change */
+        },
+        getAllKnowledge() {/* change */
+            axios({
+                url:url+"knowledge/gs",/* change */
+                method:"GET",
+            }).then((res)=>{
+                this.knowledgeData.code=res.data.code;/* change */
+                this.knowledgeData.msg=res.data.msg;/* change */
+                this.knowledgeData.data=res.data.data;/* change */
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+            })
+        },
+        knowledgeBack() {/* change */
+            this.knowledgeData.NeedToUpdateData.data='';/* change */
+            this.knowledgeData.knowledgeGS = true ;/* change */
+            this.knowledgeData.knowledgeEdit = false ;/* change */
+            this.knowledgeData.knowledgeWork = false ;/* change */
+        },
+        knowledgeEditIn() {/* change */
+            this.knowledgeData.NeedToUpdateData.data='';/* change */
+            this.knowledgeData.knowledgeGS = false ;/* change */
+            this.knowledgeData.knowledgeWork = false ;/* change */
+            this.knowledgeData.knowledgeEdit = true ;/* change */
+        },
+        setOneKnowledge(id){/* change */
+            this.knowledgeData.ChangedId = id ;/* change */
+            console.log(id);
+            this.knowledgeData.knowledgeGS = false ;/* change */
+            this.knowledgeData.knowledgeWork = true ;/* change */
+            this.knowledgeData.knowledgeEdit = false ;/* change */
+            axios({
+                url:url+"knowledge/"+id,/* change */
+                method:"GET",
+            }).then((res)=>{
+                this.knowledgeData.NeedToUpdateData.code=res.data.code;/* change */
+                this.knowledgeData.NeedToUpdateData.msg=res.data.msg;/* change */
+                this.knowledgeData.NeedToUpdateData.data=res.data.data;/* change */
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+            })
+        },
+        knowledgeUpdate() {/* change */
+            let idUpdate = this.knowledgeData.ChangedId;/* change */
+            let title = document.getElementById("knowledgeUpdateTitle").value;
+            let text = document.getElementById("knowledgeUpdateText").value;
+            let author = document.getElementById("knowledgeUpdateAuthor").value;
+            if(title===''||title===null||text===''||text===null||author===''||author===null){/* change */
+                alert("检测到空值！");
+                return;
             }
+            console.log(idUpdate);
+            let knowledgeDate = new Date().toISOString();
+            let knowledgeDateFinal = this.UTCtoGMT8(knowledgeDate);
+            let p = {/* change */
+                "id":idUpdate,
+                "title":title,
+                "text":text,
+                "author":author,
+                "date":knowledgeDateFinal
+            }
+            axios({
+                url:url+"knowledge/",/* change */
+                method:"PUT",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code===40040||res.data.code==='40040'){
+                    alert("更新失败");
+                    return;
+                }
+                alert("成功更新!");
+                this.knowledgeData.NeedToUpdateData.data='';/* change */
+                this.knowledgeData.ChangedId=0;/* change */
+                this.knowledgeData.knowledgeGS = true ;/* change */
+                this.knowledgeData.knowledgeWork = false ;/* change */
+                this.knowledgeData.knowledgeEdit = false ;/* change */
+                this.getAllKnowledge();/* change */
+            })
+        },
+        knowledgeInsert(){/* change */
+            let title = document.getElementById("knowledgeInsertTitle").value;
+            let text = document.getElementById("knowledgeInsertText").value;
+            let author = document.getElementById("knowledgeInsertAuthor").value;
+            if(title===''||title===null||text===''||text===null||author===''||author===null){/* change */
+                alert("检测到空值！");
+                return;
+            }
+            let knowledgeDate = new Date().toISOString();
+            let knowledgeDateFinal = this.UTCtoGMT8(knowledgeDate);
+            let p = {/* change */
+                "title":title,
+                "text":text,
+                "author":author,
+                "date":knowledgeDateFinal
+            }
+            console.log(p);
+            axios({
+                url:url+"knowledge/",/* change */
+                method:"POST",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code===10010||res.data.code==='10010'){
+                    alert("请检查输入");
+                    return;
+                }
+                alert("成功添加!");
+                document.getElementById("knowledgeInsertTitle").value='';/* change */
+                document.getElementById("knowledgeInsertText").value='';/* change */
+                document.getElementById("knowledgeInsertAuthor").value='';/* change */
+                this.getAllKnowledge();/* change */
+                this.knowledgeData.NeedToUpdateData.data='';/* change */
+                this.knowledgeData.knowledgeGS = true ;/* change */
+                this.knowledgeData.knowledgeWork = false ;/* change */
+                this.knowledgeData.knowledgeEdit = false ;/* change */
+            })
+        },
+        knowledgeDeleteConfirm() {/* change */
+            var aDc = confirm("是否删除？");
+            if(aDc===true){
+                this.knowledgeDelete();/* change */
+            }
+            else{
+                alert("已取消");
+            }
+        },
+        knowledgeDelete() {/* change */
+            let idDelete = this.knowledgeData.ChangedId;/* change */
+            console.log(idDelete);
+            axios({
+                url:url+"knowledge/"+idDelete,/* change */
+                method:"DELETE",
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(typeof res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code!=20021){
+                    alert("删除失败");
+                    return;
+                }
+                alert("成功删除!");
+                this.knowledgeData.NeedToUpdateData.data='';/* change */
+                this.knowledgeData.ChangedId=0;/* change */
+                this.knowledgeData.knowledgeGS = true ;/* change */
+                this.knowledgeData.knowledgeWork = false ;/* change */
+                this.knowledgeData.knowledgeEdit = false ;/* change */
+                this.getAllKnowledge();/* change */
+            })
+        },
+        /*todo billboard js*/
+        billboardIn(){/* change */
+            this.Msg2 = "Billboard management";/* change */
+            this.showBillboard=true;
+            this.showKnowledge=false;/* change */
+            this.showDashBoard=false;
+            this.showUsers=false;
+            this.showDoctor=false;
+            this.showOffices=false;
+            this.showQueue=false;
+            this.showResume=false;
+            this.showArticle=false;
+            this.getAllBillboard();/* change */
+        },
+        getAllBillboard() {/* change */
+            axios({
+                url:url+"billboard/gs",/* change */
+                method:"GET",
+            }).then((res)=>{
+                this.billboardData.code=res.data.code;/* change */
+                this.billboardData.msg=res.data.msg;/* change */
+                this.billboardData.data=res.data.data;/* change */
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+            })
+        },
+        billboardBack() {/* change */
+            this.billboardData.NeedToUpdateData.data='';/* change */
+            this.billboardData.billboardGS = true ;/* change */
+            this.billboardData.billboardEdit = false ;/* change */
+            this.billboardData.billboardWork = false ;/* change */
+        },
+        billboardEditIn() {/* change */
+            this.billboardData.NeedToUpdateData.data='';/* change */
+            this.billboardData.billboardGS = false ;/* change */
+            this.billboardData.billboardWork = false ;/* change */
+            this.billboardData.billboardEdit = true ;/* change */
+        },
+        setOneBillboard(id){/* change */
+            this.billboardData.ChangedId = id ;/* change */
+            console.log(id);
+            this.billboardData.billboardGS = false ;/* change */
+            this.billboardData.billboardWork = true ;/* change */
+            this.billboardData.billboardEdit = false ;/* change */
+            axios({
+                url:url+"billboard/"+id,/* change */
+                method:"GET",
+            }).then((res)=>{
+                this.billboardData.NeedToUpdateData.code=res.data.code;/* change */
+                this.billboardData.NeedToUpdateData.msg=res.data.msg;/* change */
+                this.billboardData.NeedToUpdateData.data=res.data.data;/* change */
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+            })
+        },
+        billboardUpdate() {/* change */
+            let idUpdate = this.billboardData.ChangedId;/* change */
+            let title = document.getElementById("billboardUpdateTitle").value;
+            let text = document.getElementById("billboardUpdateText").value;
+            let author = document.getElementById("billboardUpdateAuthor").value;
+            if(title===''||title===null||text===''||text===null||author===''||author===null){/* change */
+                alert("检测到空值！");
+                return;
+            }
+            console.log(idUpdate);
+            let billboardDate = new Date().toISOString();
+            let billboardDateFinal = this.UTCtoGMT8(billboardDate);
+            let p = {/* change */
+                "id":idUpdate,
+                "title":title,
+                "text":text,
+                "author":author,
+                "date":billboardDateFinal
+            }
+            axios({
+                url:url+"billboard/",/* change */
+                method:"PUT",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code===40040||res.data.code==='40040'){
+                    alert("更新失败");
+                    return;
+                }
+                alert("成功更新!");
+                this.billboardData.NeedToUpdateData.data='';/* change */
+                this.billboardData.ChangedId=0;/* change */
+                this.billboardData.billboardGS = true ;/* change */
+                this.billboardData.billboardWork = false ;/* change */
+                this.billboardData.billboardEdit = false ;/* change */
+                this.getAllBillboard();/* change */
+            })
+        },
+        billboardInsert(){/* change */
+            let title = document.getElementById("billboardInsertTitle").value;
+            let text = document.getElementById("billboardInsertText").value;
+            let author = document.getElementById("billboardInsertAuthor").value;
+            if(title===''||title===null||text===''||text===null||author===''||author===null){/* change */
+                alert("检测到空值！");
+                return;
+            }
+            let knowledgeDate = new Date().toISOString();
+            let knowledgeDateFinal = this.UTCtoGMT8(knowledgeDate);
+            let p = {/* change */
+                "title":title,
+                "text":text,
+                "author":author,
+                "date":knowledgeDateFinal
+            }
+            console.log(p);
+            axios({
+                url:url+"billboard/insert/",/* change */
+                method:"POST",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code===10010||res.data.code==='10010'){
+                    alert("请检查输入");
+                    return;
+                }
+                alert("成功添加!");
+                document.getElementById("billboardInsertTitle").value='';/* change */
+                document.getElementById("billboardInsertText").value='';/* change */
+                document.getElementById("billboardInsertAuthor").value='';/* change */
+                this.getAllBillboard();/* change */
+                this.billboardData.NeedToUpdateData.data='';/* change */
+                this.billboardData.billboardGS = true ;/* change */
+                this.billboardData.billboardWork = false ;/* change */
+                this.billboardData.billboardEdit = false ;/* change */
+            })
+        },
+        billboardDeleteConfirm() {/* change */
+            var aDc = confirm("是否删除？");
+            if(aDc===true){
+                this.billboardDelete();/* change */
+            }
+            else{
+                alert("已取消");
+            }
+        },
+        billboardDelete() {/* change */
+            let idDelete = this.billboardData.ChangedId;/* change */
+            console.log(idDelete);
+            let p={
+                "id":idDelete
+            }
+            axios({
+                url:url+"billboard/",/* change */
+                method:"DELETE",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(typeof res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code!=20021){
+                    alert("删除失败");
+                    return;
+                }
+                alert("成功删除!");
+                this.billboardData.NeedToUpdateData.data='';/* change */
+                this.billboardData.ChangedId=0;/* change */
+                this.billboardData.billboardGS = true ;/* change */
+                this.billboardData.billboardWork = false ;/* change */
+                this.billboardData.billboardEdit = false ;/* change */
+                this.getAllBillboard();/* change */
+            })
+        }
     },
     beforeMount(){
         this.LoginStatusCheck();
@@ -952,6 +1378,8 @@ const App = {
         this.getCountOfOffice();
         this.getCountOfQueue();
         this.getCountOfResume();
+        this.getCountOfBillboard();
+        this.getCountOfKnowledge();
         console.log(this.countAll);
     }
 }
