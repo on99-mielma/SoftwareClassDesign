@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin
@@ -35,6 +36,7 @@ public class ResumeController {
                     resume.setGender(gender!=null?gender:"未填写");
                     resume.setPhoneNumber(phoneNumber!=null?phoneNumber:"未填写");
                     resume.setCardNumber(cardNumber!=null?cardNumber:"未填写");
+                    /*System.out.println("TheFile = " + Arrays.toString(TheFile.getBytes()));*/
                     resume.setFile(TheFile.getBytes());
                     pd=resumeService.insert(resume);
                     return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
@@ -62,6 +64,7 @@ public class ResumeController {
         Resume resume = resumeService.selectId(id);
         Integer code = resume!=null?Code.GET_OK:Code.GET_ERR;
         String msg = resume!=null?"Successfully!":"查询失败";
+        /*System.out.println("resume = " + Arrays.toString(resume.getFile()));*/
         return new Result(code,msg,resume);
     }
 

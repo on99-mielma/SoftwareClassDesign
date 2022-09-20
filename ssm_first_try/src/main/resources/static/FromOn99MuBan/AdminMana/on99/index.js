@@ -183,6 +183,15 @@ const App = {
                     return date1;
                 }
             },
+            strToByte(bstr){
+                let n = bstr.length;
+                let u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                    /*console.log(bstr.charCodeAt(n));*/
+                }
+                return u8arr;
+            },
             do_settings(){
                 console.log("setting");
             },
@@ -1366,6 +1375,174 @@ const App = {
                 this.billboardData.billboardWork = false ;/* change */
                 this.billboardData.billboardEdit = false ;/* change */
                 this.getAllBillboard();/* change */
+            })
+        },
+        /*todo resume js*/
+        resumeIn(){/* change */
+            this.Msg2 = "Resume management";/* change */
+            this.showBillboard=false;
+            this.showKnowledge=false;/* change */
+            this.showDashBoard=false;
+            this.showUsers=false;
+            this.showDoctor=false;
+            this.showOffices=false;
+            this.showQueue=false;
+            this.showResume=true;
+            this.showArticle=false;
+            this.getAllResume();/* change */
+        },
+        getAllResume() {/* change */
+            axios({
+                url:url+"resume",/* change */
+                method:"GET",
+            }).then((res)=>{
+                this.resumeData.code=res.data.code;/* change */
+                this.resumeData.msg=res.data.msg;/* change */
+                this.resumeData.data=res.data.data;/* change */
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+            })
+        },
+        resumeBack() {/* change */
+            this.resumeData.NeedToUpdateData.data='';/* change */
+            this.resumeData.resumeGS = true ;/* change */
+            this.resumeData.resumeEdit = false ;/* change */
+            this.resumeData.resumeWork = false ;/* change */
+        },
+        resumeEditIn() {/* change */
+            this.resumeData.NeedToUpdateData.data='';/* change */
+            this.resumeData.resumeGS = false ;/* change */
+            this.resumeData.resumeWork = false ;/* change */
+            this.resumeData.resumeEdit = true ;/* change */
+        },
+        setOneResume(id){/* change */
+            this.resumeData.ChangedId = id ;/* change */
+            console.log(id);
+            this.resumeData.resumeGS = false ;/* change */
+            this.resumeData.resumeWork = true ;/* change */
+            this.resumeData.resumeEdit = false ;/* change */
+            axios({
+                url:url+"resume/"+id,/* change */
+                method:"GET",
+            }).then((res)=>{
+                this.resumeData.NeedToUpdateData.code=res.data.code;/* change */
+                this.resumeData.NeedToUpdateData.msg=res.data.msg;/* change */
+                this.resumeData.NeedToUpdateData.data=res.data.data;/* change */
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+            })
+        },
+        resumeUpdate() {/* change */
+            let idUpdate = this.resumeData.ChangedId;/* change */
+            let name = document.getElementById("resumeUpdateName").value;
+            let gender = document.getElementById("resumeUpdateGender").value;
+            let phoneNumber = document.getElementById("resumeUpdatePhoneNumber").value;
+            let cardNumber = document.getElementById("resumeUpdateCardNumber").value;
+            if(name===''||name===null||gender===''||gender===null||phoneNumber===''||phoneNumber===null||cardNumber===''||cardNumber===null){/* change */
+                alert("检测到空值！");
+                return;
+            }
+            console.log(idUpdate);
+            let billboardDate = new Date().toISOString();
+            let billboardDateFinal = this.UTCtoGMT8(billboardDate);
+            let p = {/* change */
+                "id":idUpdate,
+                "name":name,
+                "gender":gender,
+                "phoneNumber":phoneNumber,
+                "cardNumber":cardNumber
+            }
+            axios({
+                url:url+"resume/",/* change */
+                method:"PUT",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code===40040||res.data.code==='40040'){
+                    alert("更新失败");
+                    return;
+                }
+                alert("成功更新!");
+                this.resumeData.NeedToUpdateData.data='';/* change */
+                this.resumeData.ChangedId=0;/* change */
+                this.resumeData.resumeGS = true ;/* change */
+                this.resumeData.resumeWork = false ;/* change */
+                this.resumeData.resumeEdit = false ;/* change */
+                this.getAllResume();/* change */
+            })
+        },
+        resumeDeleteConfirm() {/* change */
+            var aDc = confirm("是否删除？");
+            if(aDc===true){
+                this.resumeDelete();/* change */
+            }
+            else{
+                alert("已取消");
+            }
+        },
+        resumeDelete() {/* change */
+            let idDelete = this.resumeData.ChangedId;/* change */
+            console.log(idDelete);
+            let p={
+                "id":idDelete
+            }
+            axios({
+                url:url+"resume/",/* change */
+                method:"DELETE",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                console.log(res.data.code);
+                console.log(typeof res.data.code);
+                console.log(res.data.msg);
+                console.log(res.data.data);
+                if(res.data.code!=20021){
+                    alert("删除失败");
+                    return;
+                }
+                alert("成功删除!");
+                this.resumeData.NeedToUpdateData.data='';/* change */
+                this.resumeData.ChangedId=0;/* change */
+                this.resumeData.resumeGS = true ;/* change */
+                this.resumeData.resumeWork = false ;/* change */
+                this.resumeData.resumeEdit = false ;/* change */
+                this.getAllResume();/* change */
+            })
+        },
+        resumeDownload(){
+            let idUpdate = this.resumeData.ChangedId;
+            axios({
+                url:url+'resume/'+idUpdate,
+                method:"GET"
+            }).then((res)=>{
+                this.resumeData.data=res.data.data;
+                if(res.data.data.file==''){
+                    alert("无文件");
+                    return;
+                }
+                let a = document.createElement("a");
+                a.style.display = "none";
+                /*let blob = dataURLToBlob(dom.toDataURL("image/png"));*/
+                a.setAttribute("href", URL.createObjectURL(new Blob([this.strToByte(atob(res.data.data.file))],{type:"application/msword"})));
+                /*console.log(atob(res.data.data.file));
+                console.log(this.strToByte(atob(res.data.data.file)));*/
+                //这块是保存图片操作  可以设置保存的图片的信息
+                a.setAttribute("download", res.data.data.id + ".docx");
+                document.body.appendChild(a);
+                a.click();
+                URL.revokeObjectURL(res.data.data.file);
+                document.body.removeChild(a);
             })
         }
     },
