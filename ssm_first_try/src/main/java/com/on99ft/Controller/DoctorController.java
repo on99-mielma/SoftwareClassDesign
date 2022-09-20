@@ -20,6 +20,7 @@ public class DoctorController {
     @Autowired
     private DttService dttService;
 
+
     @PostMapping("/insert")
     public Result insert(@RequestBody Doctor d){
         Boolean pd = doctorService.insert(d);
@@ -124,6 +125,18 @@ public class DoctorController {
         List<Doctor> doctorList = doctorService.LikeNameAndOffice(d);
         Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
         String msg = doctorList!=null?"Yes":"No";
+        if(doctorList==null){
+            return new Result(code,msg,doctorList);
+        }
+        for (Doctor doc: doctorList) {
+            Dtt dtt = dttService.selectOne(doc.getId());
+            String[] morning = dtt.getMorning().split("/");
+            String[] afternoon = dtt.getAfternoon().split("/");
+            String[] night = dtt.getNight().split("/");
+            doc.setMorning(morning);
+            doc.setAfternoon(afternoon);
+            doc.setNight(night);
+        }
         return new Result(code,msg,doctorList);
     }
 
@@ -132,6 +145,18 @@ public class DoctorController {
         List<Doctor> doctorList = doctorService.LikeSkillandInfo(d);
         Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
         String msg = doctorList!=null?"Yes":"No";
+        if(doctorList==null){
+            return new Result(code,msg,doctorList);
+        }
+        for (Doctor doc: doctorList) {
+            Dtt dtt = dttService.selectOne(doc.getId());
+            String[] morning = dtt.getMorning().split("/");
+            String[] afternoon = dtt.getAfternoon().split("/");
+            String[] night = dtt.getNight().split("/");
+            doc.setMorning(morning);
+            doc.setAfternoon(afternoon);
+            doc.setNight(night);
+        }
         return new Result(code,msg,doctorList);
     }
 }

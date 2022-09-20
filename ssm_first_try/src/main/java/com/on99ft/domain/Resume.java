@@ -12,8 +12,10 @@ public class Resume {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
     private String name;
+    @TableField(value = "phoneNumber")
     private String phoneNumber;
     private String gender;
+    @TableField("cardNumber")
     private String cardNumber;
     //todo https://blog.csdn.net/qq_28169023/article/details/125367483?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-1-125367483-blog-114965325.relrec_prioritylanding&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-1-125367483-blog-114965325.relrec_prioritylanding&utm_relevant_index=1
     @TableField(value = "file",typeHandler = BlobTypeHandler.class)

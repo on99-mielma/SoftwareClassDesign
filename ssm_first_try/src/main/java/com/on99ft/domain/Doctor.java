@@ -1,5 +1,6 @@
 package com.on99ft.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,6 +13,13 @@ public class Doctor {
     private String skill;
 
     private String info;
+
+    @TableField(exist = false)
+    private String[] morning;
+    @TableField(exist = false)
+    private String[] afternoon;
+    @TableField(exist = false)
+    private String[] night;
 
     @Override
     public String toString() {
@@ -62,5 +70,29 @@ public class Doctor {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String[] getMorning() {
+        return morning;
+    }
+
+    public void setMorning(String[] morning) {
+        this.morning = morning;
+    }
+
+    public String[] getAfternoon() {
+        return afternoon;
+    }
+
+    public void setAfternoon(String[] afternoon) {
+        this.afternoon = afternoon;
+    }
+
+    public String[] getNight() {
+        return night;
+    }
+
+    public void setNight(String[] night) {
+        this.night = night;
     }
 }
