@@ -44,10 +44,20 @@ public class DoctorController {
 
     @GetMapping("/{id}")
     public Result getByid(@PathVariable Long id){
-        Doctor k = doctorService.getById(id);
-        Integer code = k!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
-        String msg = k!=null?"Yes":"No";
-        return new Result(code,msg,k);
+        Doctor doc = doctorService.getById(id);
+        Integer code = doc!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
+        String msg = doc!=null?"Yes":"No";
+        if(doc==null){
+            return new Result(code,msg,doc);
+        }
+        Dtt dtt = dttService.selectOne(id);
+        String[] morning = dtt.getMorning().split("/");
+        String[] afternoon = dtt.getAfternoon().split("/");
+        String[] night = dtt.getNight().split("/");
+        doc.setMorning(morning);
+        doc.setAfternoon(afternoon);
+        doc.setNight(night);
+        return new Result(code,msg,doc);
     }
 
     @GetMapping
