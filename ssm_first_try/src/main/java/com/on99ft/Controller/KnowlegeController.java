@@ -124,4 +124,15 @@ public class KnowlegeController {
         }
         return new Result(code,msg,resultList);
     }
+
+    @GetMapping("/LTOT")
+    public Result LikeTitleOrText(@RequestBody Knowledge k){
+        List<Knowledge> knowledgeList = knowledgeService.LikeTitleOrText(k);
+        Integer code = knowledgeList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
+        String msg = knowledgeList!=null?"Yes":"无结果";
+        if(knowledgeList==null){
+            return  new Result(code,msg,knowledgeList);
+        }
+        return new Result(code,msg,knowledgeList);
+    }
 }

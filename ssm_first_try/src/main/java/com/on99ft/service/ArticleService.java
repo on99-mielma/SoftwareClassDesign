@@ -13,4 +13,6 @@ public interface ArticleService {
     public Long countArticle();
 
     public List<Article> selectWithLimit(Long cur,Long size);
+
+    public List<Article> LikeTitleOrText(Article a);
 }

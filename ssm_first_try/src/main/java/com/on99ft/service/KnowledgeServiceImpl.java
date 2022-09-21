@@ -2,8 +2,10 @@ package com.on99ft.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.on99ft.dao.KnowledgeDao;
+import com.on99ft.domain.Article;
 import com.on99ft.domain.Knowledge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +50,12 @@ public class KnowledgeServiceImpl implements KnowledgeService{
         queryWrapper.orderByDesc("date");
         IPage<Knowledge> page = knowledgeDao.selectPage(new Page<Knowledge>(cur,size),queryWrapper);
         return page.getRecords();
+    }
+
+    public List<Knowledge> LikeTitleOrText(Knowledge k) {
+        QueryWrapper<Knowledge> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(k.getTitle()),"title",k.getTitle());
+        queryWrapper.like(StringUtils.isNotBlank(k.getText()),"text",k.getText());
+        return knowledgeDao.selectList(queryWrapper);
     }
 }

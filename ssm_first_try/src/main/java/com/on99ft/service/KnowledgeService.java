@@ -1,5 +1,6 @@
 package com.on99ft.service;
 
+import com.on99ft.domain.Article;
 import com.on99ft.domain.Knowledge;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface KnowledgeService {
 
     public List<Knowledge> selectWithLimit(Long cur,Long size);
 
+    public List<Knowledge> LikeTitleOrText(Knowledge k);
 }

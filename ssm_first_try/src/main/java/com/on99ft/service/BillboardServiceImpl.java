@@ -2,6 +2,7 @@ package com.on99ft.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.on99ft.dao.BillboardDao;
 import com.on99ft.domain.Billboard;
@@ -48,5 +49,12 @@ public class BillboardServiceImpl implements BillboardService {
         queryWrapper.orderByDesc("date");
         IPage<Billboard> page = billboardDao.selectPage(new Page<>(cur,size),queryWrapper);
         return page.getRecords();
+    }
+
+    public List<Billboard> LikeTitleOrText(Billboard b) {
+        QueryWrapper<Billboard> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(b.getTitle()),"title",b.getTitle());
+        queryWrapper.like(StringUtils.isNotBlank(b.getText()),"text",b.getText());
+        return billboardDao.selectList(queryWrapper);
     }
 }

@@ -2,6 +2,7 @@ package com.on99ft.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.on99ft.dao.ArticleDao;
 import com.on99ft.domain.Article;
@@ -48,5 +49,12 @@ public class ArticleServiceImpl implements ArticleService {
         queryWrapper.orderByDesc("date");
         IPage<Article> page = articleDao.selectPage(new Page<>(cur,size),queryWrapper);
         return page.getRecords();
+    }
+
+    public List<Article> LikeTitleOrText(Article a) {
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(a.getTitle()),"title",a.getTitle());
+        queryWrapper.like(StringUtils.isNotBlank(a.getText()),"text",a.getText());
+        return articleDao.selectList(queryWrapper);
     }
 }

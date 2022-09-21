@@ -12,4 +12,6 @@ public interface BillboardService {
     public List<Billboard> selectAll();
     public Long countBillboard();
     public List<Billboard> selectWithLimit(Long cur, Long size);
+
+    public List<Billboard> LikeTitleOrText(Billboard b);
 }

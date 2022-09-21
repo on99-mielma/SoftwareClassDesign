@@ -1,6 +1,7 @@
 package com.on99ft.Controller;
 
 import com.on99ft.domain.Article;
+import com.on99ft.domain.Billboard;
 import com.on99ft.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -124,5 +125,16 @@ public class ArticleController {
             resultList.add(tempList);
         }
         return new Result(code,msg,resultList);
+    }
+
+    @GetMapping("/LTOT")
+    public Result LikeTitleOrText(@RequestBody Article a){
+        List<Article> articleList = articleService.LikeTitleOrText(a);
+        Integer code = articleList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;
+        String msg = articleList!=null?"Yes":"无结果";
+        if(articleList==null){
+            return  new Result(code,msg,articleList);
+        }
+        return new Result(code,msg,articleList);
     }
 }
