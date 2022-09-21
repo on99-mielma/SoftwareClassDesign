@@ -19,4 +19,6 @@ public interface DoctorService {
     public List<Doctor> WhereOffice(String o);
 
     public List<Doctor> LikeSkillandInfo(Doctor d);
+
+    public List<Doctor> LikeExceptId(Doctor d);
 }

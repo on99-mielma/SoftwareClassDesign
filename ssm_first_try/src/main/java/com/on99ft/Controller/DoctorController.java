@@ -2,11 +2,13 @@ package com.on99ft.Controller;
 
 import com.on99ft.domain.Doctor;
 import com.on99ft.domain.Dtt;
+import com.on99ft.domain.Offices;
 import com.on99ft.service.DoctorService;
 import com.on99ft.service.DttService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -130,7 +132,7 @@ public class DoctorController {
         return new Result(Code.GET_OK,"^^",doctorService.countDoctor());
     }
 
-    @GetMapping("/LNAO")
+    @PostMapping("/LNAO")
     public Result LikeNameAndOffice(@RequestBody Doctor d){
         List<Doctor> doctorList = doctorService.LikeNameAndOffice(d);
         Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
@@ -150,9 +152,55 @@ public class DoctorController {
         return new Result(code,msg,doctorList);
     }
 
-    @GetMapping("/LSAI")
+    @PostMapping("/LSAI")
     public Result LikeSkillAndInfo(@RequestBody Doctor d){
         List<Doctor> doctorList = doctorService.LikeSkillandInfo(d);
+        Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
+        String msg = doctorList!=null?"Yes":"No";
+        if(doctorList==null){
+            return new Result(code,msg,doctorList);
+        }
+        for (Doctor doc: doctorList) {
+            Dtt dtt = dttService.selectOne(doc.getId());
+            String[] morning = dtt.getMorning().split("/");
+            String[] afternoon = dtt.getAfternoon().split("/");
+            String[] night = dtt.getNight().split("/");
+            doc.setMorning(morning);
+            doc.setAfternoon(afternoon);
+            doc.setNight(night);
+        }
+        return new Result(code,msg,doctorList);
+    }
+
+    @GetMapping("/2d/{size}")
+    public Result select2D(@PathVariable Long size){//size表示一组多少个
+        List<Doctor> doctorList = doctorService.getAll();
+        Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
+        String msg = doctorList!=null?"Successfully!":"查询失败";
+        if(doctorList==null){
+            return new Result(code,msg,null);
+        }
+        ArrayList<List<Doctor>> resultList = new ArrayList<>();
+        Long i=0L;
+        List<Doctor> tempList = new ArrayList<>();
+        for (Doctor w: doctorList) {
+            if(i.equals(size)){
+                i=0L;
+                resultList.add(tempList);
+                tempList=new ArrayList<>();
+            }
+            i+=1L;
+            tempList.add(w);
+        }
+        if(!tempList.isEmpty()){
+            resultList.add(tempList);
+        }
+        return new Result(code,msg,resultList);
+    }
+
+    @PostMapping("/LEI")
+    public Result LikeExceptId(@RequestBody Doctor d){
+        List<Doctor> doctorList = doctorService.LikeExceptId(d);
         Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
         String msg = doctorList!=null?"Yes":"No";
         if(doctorList==null){

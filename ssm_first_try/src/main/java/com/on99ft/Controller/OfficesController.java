@@ -147,7 +147,7 @@ public class OfficesController {
         return new Result(Code.GET_OK,"^^",officesService.countOffices());
     }
 
-    @GetMapping("LOAD")
+    @PostMapping("LOAD")
     public Result LikeOfficeAndDoctor(@RequestBody Offices offices){//0-6早上 10-16下午 20-26晚上
         List<Offices> officesList = officesService.LikeName(offices);
         if(officesList==null){
@@ -163,7 +163,6 @@ public class OfficesController {
                 for (Doctor d: doctorList) {
                     Dtt dtt = dttService.selectOne(d.getId());
                     String[] morning = dtt.getMorning().split("/");
-/*                    System.out.println("morning = " + morning);*/
                     for (int i = 0; i < morning.length; i++) {
                         String tmp = morning[i];
                         if("0".equals(tmp)){

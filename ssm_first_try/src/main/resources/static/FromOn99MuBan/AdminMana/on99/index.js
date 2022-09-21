@@ -1571,7 +1571,224 @@ const loginApp = {
             formData:{},
             code:0,
             msg:'',
-            data:[]
+            data:[],
+            OADdata:[{
+                "id":"",
+                "officeName":"",
+                "officeInfo":"",
+                "doctorInOffice":{
+                    "0":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "1":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "2":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "3":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "4":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "5":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "6":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "10":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "11":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "12":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "13":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "14":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "15":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "16":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "20":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "21":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "22":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "23":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "24":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "25":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                    "26":[{
+                        "id": "",
+                        "name": "",
+                        "office": "",
+                        "skill": "",
+                        "info": "",
+                        "morning": "",
+                        "afternoon": "",
+                        "night": ""
+                    }],
+                }
+            }]
         }
     },
     methods:{
@@ -1622,9 +1839,29 @@ const loginApp = {
         do_reset:function (){
             document.getElementById('thePassword').value = null;
             document.getElementById("theLoginName").value = null;
+            console.log(this.OADdata[0]["doctorInOffice"
+                ]["1"][0]);//todo 访问下标
+        },
+        do_init(){
+            let p = {
+                "officeName":"肿瘤内科"
+            }
+            axios({
+                url:url+"offices/LOAD",
+                method:"POST",
+                data:JSON.stringify(p),
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                }
+            }).then((res)=>{
+                this.OADdata = res.data.data;
+                console.log(res.data.data);
+            })
         }
     },
     beforeMount() {
+        this.do_init();
         console.log(new Date());
     }
 }
