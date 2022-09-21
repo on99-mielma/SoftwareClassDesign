@@ -59,6 +59,30 @@ public class OfficesController {
         Offices offices = officesService.selectById(id);
         Integer code = offices!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
         String msg = offices!=null?"Successfully!":"NULL";
+        if(offices==null){
+            return new Result(code,msg,offices);
+        }
+        Map<Integer,List<Doctor>> TMapIL = new HashMap<>();
+        List<Doctor> doctorList = doctorService.WhereOffice(offices.getOfficeName());
+        if(doctorList==null){
+            return new Result(code,msg,offices);
+        }
+        else{
+            for(Doctor d: doctorList) {
+                d.setInfo("null");
+                d.setSkill("null");
+                d.setOffice("null");
+                if(TMapIL.containsKey(0)){
+                    TMapIL.get(0).add(d);
+                }
+                else {
+                    List<Doctor> doctors = new ArrayList<>();
+                    doctors.add(d);
+                    TMapIL.put(0,doctors);
+                }
+            }
+        }
+        offices.setDoctorInOffice(TMapIL);
         return new Result(code,msg,offices);
     }
     //todo 双击选中单词 三击选中整行
