@@ -5,6 +5,7 @@ import com.on99ft.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -24,13 +25,14 @@ public class ResumeController {
     }
 
     @PostMapping("/upload")
-    public Result uploadFile(@RequestParam(value = "TheFile")MultipartFile TheFile,@RequestParam(value = "name",required = false) String name,@RequestParam(value = "gender",required = false) String gender,@RequestParam(value = "phoneNumber",required = false) String phoneNumber,@RequestParam(value = "cardNumber",required = false) String cardNumber){
+    public ModelAndView uploadFile(@RequestParam(value = "TheFile")MultipartFile TheFile,@RequestParam(value = "name",required = false) String name,@RequestParam(value = "gender",required = false) String gender,@RequestParam(value = "phoneNumber",required = false) String phoneNumber,@RequestParam(value = "cardNumber",required = false) String cardNumber){
         boolean pd =false;
+        ModelAndView modelAndView = new ModelAndView();
         if(TheFile==null){
-            return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
+            return null;
         }
             try {
-                if (TheFile.getOriginalFilename().endsWith(".doc")||TheFile.getOriginalFilename().endsWith(".docx")) {
+                if (TheFile.getOriginalFilename().endsWith(".doc")||TheFile.getOriginalFilename().endsWith(".docx")||TheFile.getOriginalFilename().endsWith(".pdf")) {
                     Resume resume = new Resume();
                     resume.setName(name!=null?name:"未填写");
                     resume.setGender(gender!=null?gender:"未填写");
@@ -39,9 +41,10 @@ public class ResumeController {
                     /*System.out.println("TheFile = " + Arrays.toString(TheFile.getBytes()));*/
                     resume.setFile(TheFile.getBytes());
                     pd=resumeService.insert(resume);
-                    return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
+                    modelAndView.setViewName(pd?Code.POST_RESUME_OK:Code.POST_RESUME_ERR);
+                    return modelAndView;
                 }
-                return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
+                return modelAndView;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

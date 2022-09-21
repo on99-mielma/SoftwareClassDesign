@@ -1538,7 +1538,7 @@ const App = {
                 /*console.log(atob(res.data.data.file));
                 console.log(this.strToByte(atob(res.data.data.file)));*/
                 //这块是保存图片操作  可以设置保存的图片的信息
-                a.setAttribute("download", res.data.data.id + ".docx");
+                a.setAttribute("download", idUpdate + ".docx");
                 document.body.appendChild(a);
                 a.click();
                 URL.revokeObjectURL(res.data.data.file);

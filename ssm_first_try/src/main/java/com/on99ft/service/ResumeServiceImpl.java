@@ -27,7 +27,9 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     public List<Resume> selectAll() {
-        return resumeDao.selectList(null);
+        QueryWrapper<Resume> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        return resumeDao.selectList(queryWrapper);
     }
 
     public Long countResume() {
