@@ -125,7 +125,7 @@ public class KnowlegeController {
         return new Result(code,msg,resultList);
     }
 
-    @GetMapping("/LTOT")
+    @PostMapping("/LTOT")
     public Result LikeTitleOrText(@RequestBody Knowledge k){
         List<Knowledge> knowledgeList = knowledgeService.LikeTitleOrText(k);
         Integer code = knowledgeList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;

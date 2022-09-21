@@ -127,7 +127,7 @@ public class BillboardController {
         return new Result(code,msg,resultList);
     }
 
-    @GetMapping("/LTOT")
+    @PostMapping("/LTOT")
     public Result LikeTitleOrText(@RequestBody Billboard b){
         List<Billboard> billboardList = billboardService.LikeTitleOrText(b);
         Integer code = billboardList!=null?Code.GET_BILLBOARD_OK:Code.GET_BILLBOARD_ERR;

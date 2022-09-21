@@ -147,7 +147,7 @@ public class OfficesController {
         return new Result(Code.GET_OK,"^^",officesService.countOffices());
     }
 
-    @GetMapping("LOAD")
+    @PostMapping("LOAD")
     public Result LikeOfficeAndDoctor(@RequestBody Offices offices){//0-6早上 10-16下午 20-26晚上
         List<Offices> officesList = officesService.LikeName(offices);
         if(officesList==null){

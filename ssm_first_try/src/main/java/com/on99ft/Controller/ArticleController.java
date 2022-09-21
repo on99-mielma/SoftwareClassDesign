@@ -127,7 +127,7 @@ public class ArticleController {
         return new Result(code,msg,resultList);
     }
 
-    @GetMapping("/LTOT")
+    @PostMapping("/LTOT")
     public Result LikeTitleOrText(@RequestBody Article a){
         List<Article> articleList = articleService.LikeTitleOrText(a);
         Integer code = articleList!=null?Code.GET_ARTICLE_OK:Code.GET_ARTICLE_ERR;

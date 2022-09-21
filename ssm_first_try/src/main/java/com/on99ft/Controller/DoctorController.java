@@ -130,7 +130,7 @@ public class DoctorController {
         return new Result(Code.GET_OK,"^^",doctorService.countDoctor());
     }
 
-    @GetMapping("/LNAO")
+    @PostMapping("/LNAO")
     public Result LikeNameAndOffice(@RequestBody Doctor d){
         List<Doctor> doctorList = doctorService.LikeNameAndOffice(d);
         Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
@@ -150,7 +150,7 @@ public class DoctorController {
         return new Result(code,msg,doctorList);
     }
 
-    @GetMapping("/LSAI")
+    @PostMapping("/LSAI")
     public Result LikeSkillAndInfo(@RequestBody Doctor d){
         List<Doctor> doctorList = doctorService.LikeSkillandInfo(d);
         Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
