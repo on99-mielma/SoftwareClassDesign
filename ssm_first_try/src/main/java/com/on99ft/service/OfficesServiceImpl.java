@@ -25,7 +25,9 @@ public class OfficesServiceImpl implements OfficesService {
     }
 
     public List<Offices> SelectAll() {
-        return officesDao.selectList(null);
+        QueryWrapper<Offices> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("officeName");
+        return officesDao.selectList(queryWrapper);
     }
 
     public Long countOffices() {

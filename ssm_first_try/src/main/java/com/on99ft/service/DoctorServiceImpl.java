@@ -22,7 +22,7 @@ public class DoctorServiceImpl implements DoctorService{
     public List<Doctor> getAll() {
         QueryWrapper<Doctor> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id","office");
-        return doctorDao.selectList(null);
+        return doctorDao.selectList(queryWrapper);
     }
 
     public Boolean insert(Doctor d) {

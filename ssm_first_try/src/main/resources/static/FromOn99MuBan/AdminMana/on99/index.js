@@ -616,6 +616,7 @@ const App = {
                     this.doctorData.doctorWork = false ;
                     this.doctorData.doctorEdit = false ;
                 })
+                scrollTo(0,0);
             },
             doctorDeleteConfirm() {
                 var aDc = confirm("是否删除？");
