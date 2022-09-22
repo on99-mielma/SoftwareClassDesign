@@ -15,7 +15,9 @@ public class QueueRegServiceImpl implements QueueRegService {
     private QueueRegDao queueRegDao;
 
     public List<QueueReg> getAll() {
-        return queueRegDao.selectList(null);
+        QueryWrapper<QueueReg> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("time");
+        return queueRegDao.selectList(queryWrapper);
     }
 
     public QueueReg getById(Long id) {

@@ -22278,7 +22278,12 @@ dl li {
 }
 
 .auth.lock-full-bg {
-  background: url("../images/auth/lockscreen-bg.jpg");
+  background: url("../images/auth/lockscreen-bg.jpeg");
+  background-size: cover;
+}
+
+.auth.resume-failure {
+  background: url("../images/auth/resume-failure.jpeg");
   background-size: cover;
 }
 

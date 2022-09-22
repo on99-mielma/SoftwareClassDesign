@@ -39,6 +39,6 @@ public class Code {
     public static final String SDELETE_OK = "删除成功";
     public static final String SDELETE_ERR = "删除失败，请检查JSON数据或ID";
     public static final String POST_RESUME_OK = "redirect:/FromOn99MuBan/AdminMana/on99/FormToResumeSuccess.html";
-    public static final String POST_RESUME_ERR = "redirect:https://www.acfun.cn/";
+    public static final String POST_RESUME_ERR = "redirect:/FromOn99MuBan/AdminMana/on99/FormToResumeFailure.html";
 
 }

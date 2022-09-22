@@ -18,11 +18,11 @@ public class ResumeController {
     @Autowired
     private ResumeService resumeService;
 
-    @PostMapping("/insert")
+    /*@PostMapping("/insert")
     public Result insert(@RequestBody Resume r){
         boolean pd = resumeService.insert(r);
-        return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
-    }
+        return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,r);
+    }*/
 
     @PostMapping("/upload")
     public ModelAndView uploadFile(@RequestParam(value = "TheFile")MultipartFile TheFile,@RequestParam(value = "name",required = false) String name,@RequestParam(value = "gender",required = false) String gender,@RequestParam(value = "phoneNumber",required = false) String phoneNumber,@RequestParam(value = "cardNumber",required = false) String cardNumber){
