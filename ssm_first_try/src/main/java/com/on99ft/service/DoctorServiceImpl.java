@@ -63,4 +63,13 @@ public class DoctorServiceImpl implements DoctorService{
         queryWrapper.like(StringUtils.isNotBlank(d.getInfo()),"info",d.getInfo());
         return doctorDao.selectList(queryWrapper);
     }
+
+    public List<Doctor> LikeExceptId(Doctor d) {
+        QueryWrapper<Doctor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(d.getName()),"name",d.getName());
+        queryWrapper.like(StringUtils.isNotBlank(d.getOffice()),"office",d.getOffice());
+        queryWrapper.like(StringUtils.isNotBlank(d.getSkill()),"skill",d.getSkill());
+        queryWrapper.like(StringUtils.isNotBlank(d.getInfo()),"info",d.getInfo());
+        return doctorDao.selectList(queryWrapper);
+    }
 }
