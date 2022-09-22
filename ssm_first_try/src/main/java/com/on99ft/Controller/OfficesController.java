@@ -130,10 +130,7 @@ public class OfficesController {
         for (Offices w: officesList) {
             Map<Integer,List<Doctor>> TMapIL = new HashMap<>();
             List<Doctor> doctorList = doctorService.WhereOffice(w.getOfficeName());
-            if(doctorList==null){
-                continue;
-            }
-            else{
+            if(doctorList!=null){
                 for(Doctor d:doctorList){
                     d.setInfo("null");
                     d.setSkill("null");
