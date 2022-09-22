@@ -128,6 +128,27 @@ public class OfficesController {
         Long i=0L;
         List<Offices> tempList = new ArrayList<>();
         for (Offices w: officesList) {
+            Map<Integer,List<Doctor>> TMapIL = new HashMap<>();
+            List<Doctor> doctorList = doctorService.WhereOffice(w.getOfficeName());
+            if(doctorList==null){
+                continue;
+            }
+            else{
+                for(Doctor d:doctorList){
+                    d.setInfo("null");
+                    d.setSkill("null");
+                    d.setOffice("null");
+                    if(TMapIL.containsKey(0)){
+                        TMapIL.get(0).add(d);
+                    }
+                    else {
+                        List<Doctor> doctors = new ArrayList<>();
+                        doctors.add(d);
+                        TMapIL.put(0,doctors);
+                    }
+                }
+            }
+            w.setDoctorInOffice(TMapIL);
             if(i.equals(size)){
                 i=0L;
                 resultList.add(tempList);
