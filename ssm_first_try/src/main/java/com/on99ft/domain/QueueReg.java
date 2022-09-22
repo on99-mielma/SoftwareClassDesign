@@ -12,7 +12,9 @@ public class QueueReg {
     private String name;
     private String office;
     private String doctor;
-    private String info;
+    private String info;//身份证号
+
+    private String phone;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
     private LocalDateTime time;//todo 猜测未来会出bug^^ fix!
 
@@ -24,8 +26,18 @@ public class QueueReg {
                 ", office='" + office + '\'' +
                 ", doctor='" + doctor + '\'' +
                 ", info='" + info + '\'' +
+                ", phone='" + phone + '\'' +
                 ", time=" + time +
                 '}';
+    }
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getId() {

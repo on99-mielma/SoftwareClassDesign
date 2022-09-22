@@ -1844,9 +1844,9 @@ const loginApp = {
         do_reset:function (){
             document.getElementById('thePassword').value = null;
             document.getElementById("theLoginName").value = null;
-            console.log(this.OADdata[0]["doctorInOffice"]["1"][0]);//todo 访问下标
+            /*console.log(this.OADdata[0]["doctorInOffice"]["1"][0]);//todo 访问下标*/
         },
-        do_init(){
+        /*do_init(){
             let p = {
                 "officeName":"肿瘤内科"
             }
@@ -1856,7 +1856,7 @@ const loginApp = {
                 data:JSON.stringify(p),
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8'
-                    /*'Content-Type': 'application/json;charset=UTF-8'*/
+                    /!*'Content-Type': 'application/json;charset=UTF-8'*!/
                 }
             }).then((res)=>{
                 this.OADdata = res.data.data;
@@ -1874,11 +1874,11 @@ const loginApp = {
                 this.doctor_data.data = res.data.data;
                 console.log(res.data.data);
             })
-        }
+        }*/
     },
     beforeMount() {
-        this.do_init_2();
-        this.do_init();
+        /*this.do_init_2();
+        this.do_init();*/
         console.log(new Date());
     }
 }
