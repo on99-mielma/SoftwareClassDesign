@@ -16,7 +16,7 @@ public class QueueRegController {
     @PostMapping("/insert")
     public Result save(@RequestBody QueueReg q){
         boolean pd = queueRegService.save(q);
-        return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd);
+        return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,q);
     }
 
     @PutMapping

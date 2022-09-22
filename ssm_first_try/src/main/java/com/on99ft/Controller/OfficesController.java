@@ -69,9 +69,6 @@ public class OfficesController {
         }
         else{
             for(Doctor d: doctorList) {
-                d.setInfo("null");
-                d.setSkill("null");
-                d.setOffice("null");
                 if(TMapIL.containsKey(0)){
                     TMapIL.get(0).add(d);
                 }
@@ -91,6 +88,28 @@ public class OfficesController {
         List<Offices> officesList = officesService.SelectAll();
         Integer code = officesList!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
         String msg = officesList!=null?"Successfully!":"查询失败";
+        if(officesList==null){
+            return new Result(code,msg,officesList);
+        }
+        for(Offices w: officesList){
+            Map<Integer, List<Doctor>> TMapIL = new HashMap<>();
+            List<Doctor> doctorList = doctorService.WhereOffice(w.getOfficeName());
+            if (doctorList != null) {
+                for (Doctor d : doctorList) {
+                    d.setInfo("null");
+                    d.setSkill("null");
+                    d.setOffice("null");
+                    if (TMapIL.containsKey(0)) {
+                        TMapIL.get(0).add(d);
+                    } else {
+                        List<Doctor> doctors = new ArrayList<>();
+                        doctors.add(d);
+                        TMapIL.put(0, doctors);
+                    }
+                }
+            }
+            w.setDoctorInOffice(TMapIL);
+        }
         return new Result(code,msg,officesList);
     }
     @GetMapping("/gs")
@@ -101,8 +120,24 @@ public class OfficesController {
         if(officesList==null){
             return new Result(code,msg,null);
         }
-        for (Offices o:
-             officesList) {
+        for (Offices o: officesList) {
+            Map<Integer, List<Doctor>> TMapIL = new HashMap<>();
+            List<Doctor> doctorList = doctorService.WhereOffice(o.getOfficeName());
+            if (doctorList != null) {
+                for (Doctor d : doctorList) {
+                    d.setInfo("null");
+                    d.setSkill("null");
+                    d.setOffice("null");
+                    if (TMapIL.containsKey(0)) {
+                        TMapIL.get(0).add(d);
+                    } else {
+                        List<Doctor> doctors = new ArrayList<>();
+                        doctors.add(d);
+                        TMapIL.put(0, doctors);
+                    }
+                }
+            }
+            o.setDoctorInOffice(TMapIL);
             if(o.getOfficeInfo()==null||"".equals(o.getOfficeInfo())){
                 o.setOfficeInfo("无");
             }
@@ -130,10 +165,7 @@ public class OfficesController {
         for (Offices w: officesList) {
             Map<Integer,List<Doctor>> TMapIL = new HashMap<>();
             List<Doctor> doctorList = doctorService.WhereOffice(w.getOfficeName());
-            if(doctorList==null){
-                continue;
-            }
-            else{
+            if(doctorList!=null){
                 for(Doctor d:doctorList){
                     d.setInfo("null");
                     d.setSkill("null");

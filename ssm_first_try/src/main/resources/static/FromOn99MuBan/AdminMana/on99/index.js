@@ -193,9 +193,11 @@ const App = {
                 return u8arr;
             },
             do_settings(){
+                console.log(this.countAll);
                 console.log("setting");
             },
             do_logout(){
+                window.location.href="login.html";
                 console.log("logout");
             },
             getCountOfUsers(){
@@ -204,7 +206,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countUsers=res.data.data;
-                    console.log(res.data.data);
+                    console.log("users"+res.data.data);
                 })
             },
             getCountOfDoctor() {
@@ -213,7 +215,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countDoctor=res.data.data;
-                    console.log(res.data.data);
+                    console.log("doctor"+res.data.data);
                 })
             },
             getCountOfOffice() {
@@ -222,7 +224,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countOffices=res.data.data;
-                    console.log(res.data.data);
+                    console.log("office"+res.data.data);
                 })
             },
             getCountOfQueue() {
@@ -231,7 +233,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countQueue=res.data.data;
-                    console.log(res.data.data);
+                    console.log("queue"+res.data.data);
                 })
             },
             getCountOfResume() {
@@ -240,7 +242,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countResume=res.data.data;
-                    console.log(res.data.data);
+                    console.log("resume"+res.data.data);
                 })
             },
             getCountOfArticle() {
@@ -249,7 +251,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countArticle=res.data.data;
-                    console.log(res.data.data);
+                    console.log("article"+res.data.data);
                 })
             },
             getCountOfKnowledge() {
@@ -258,7 +260,7 @@ const App = {
                     method:"GET"
                 }).then((res)=>{
                     this.countAll.countKnowledge=res.data.data;
-                    console.log(res.data.data);
+                    console.log("knowledge"+res.data.data);
                 })
             },
             getCountOfBillboard(){
@@ -370,6 +372,7 @@ const App = {
                     this.articleData.articleEdit = false ;
                     this.getAllArticle();
                 })
+                scrollTo(0,0);
             },
             articleDeleteConfirm() {
                 var aDc = confirm("是否删除？");
@@ -453,6 +456,14 @@ const App = {
             },
             dashBoardIn () {
                 this.Msg2 = "Your analytics dashboard AdminMana.";
+                this.getCountOfUsers();
+                this.getCountOfArticle();
+                this.getCountOfDoctor();
+                this.getCountOfOffice();
+                this.getCountOfQueue();
+                this.getCountOfResume();
+                this.getCountOfKnowledge();
+                this.getCountOfBillboard();
                 this.showDashBoard=true;
                 this.showBillboard=false;
                 this.showKnowledge=false;
@@ -462,12 +473,6 @@ const App = {
                 this.showQueue=false;
                 this.showResume=false;
                 this.showArticle=false;
-                this.getCountOfUsers();
-                this.getCountOfArticle();
-                this.getCountOfDoctor();
-                this.getCountOfOffice();
-                this.getCountOfQueue();
-                this.getCountOfResume();
             },
             /*todo doctor js*/
             doctorIn (){
@@ -799,6 +804,7 @@ const App = {
                     this.queueData.queueWork = false ;/* change */
                     this.queueData.queueEdit = false ;/* change */
                 })
+                scrollTo(0,0);
             },
             queueDeleteConfirm() {/* change */
                 var aDc = confirm("是否删除？");
@@ -973,6 +979,7 @@ const App = {
                     this.officesData.officesWork = false ;/* change */
                     this.officesData.officesEdit = false ;/* change */
                 })
+                scrollTo(0,0);
             },
             officesDeleteConfirm() {/* change */
                 var aDc = confirm("是否删除？");
@@ -1158,6 +1165,7 @@ const App = {
                 this.knowledgeData.knowledgeWork = false ;/* change */
                 this.knowledgeData.knowledgeEdit = false ;/* change */
             })
+            scrollTo(0,0);
         },
         knowledgeDeleteConfirm() {/* change */
             var aDc = confirm("是否删除？");
@@ -1336,6 +1344,7 @@ const App = {
                 this.billboardData.billboardWork = false ;/* change */
                 this.billboardData.billboardEdit = false ;/* change */
             })
+            scrollTo(0,0);
         },
         billboardDeleteConfirm() {/* change */
             var aDc = confirm("是否删除？");
