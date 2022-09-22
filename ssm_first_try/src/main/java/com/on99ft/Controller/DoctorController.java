@@ -64,10 +64,22 @@ public class DoctorController {
 
     @GetMapping
     public Result getAll(){
-        List<Doctor> knowledgeList = doctorService.getAll();
-        Integer code = knowledgeList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
-        String msg = knowledgeList!=null?"Yes":"No";
-        return new Result(code,msg,knowledgeList);
+        List<Doctor> doctorList = doctorService.getAll();
+        Integer code = doctorList!=null?Code.GET_DOCTOR_OK:Code.GET_DOCTOR_ERR;
+        String msg = doctorList!=null?"Yes":"No";
+        if(doctorList==null){
+            return new Result(code,msg,doctorList);
+        }
+        for (Doctor doc: doctorList) {
+            Dtt dtt = dttService.selectOne(doc.getId());
+            String[] morning = dtt.getMorning().split("/");
+            String[] afternoon = dtt.getAfternoon().split("/");
+            String[] night = dtt.getNight().split("/");
+            doc.setMorning(morning);
+            doc.setAfternoon(afternoon);
+            doc.setNight(night);
+        }
+        return new Result(code,msg,doctorList);
     }
     @GetMapping(value = "/gs")
     public Result getAllgs(){
