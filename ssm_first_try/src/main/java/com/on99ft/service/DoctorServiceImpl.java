@@ -52,7 +52,7 @@ public class DoctorServiceImpl implements DoctorService{
     public List<Doctor> WhereOffice(String o) {
         LambdaQueryWrapper<Doctor> lqw = new LambdaQueryWrapper<>();
         lqw.eq(Doctor::getOffice,o);
-        lqw.select(Doctor::getId,Doctor::getName,Doctor::getOffice);
+        /*lqw.select(Doctor::getId,Doctor::getName,Doctor::getOffice);*/
         List<Doctor> doctorList = doctorDao.selectList(lqw);
         return doctorList;
     }
