@@ -22,7 +22,6 @@ public class DoctorController {
     @Autowired
     private DttService dttService;
 
-
     @PostMapping("/insert")
     public Result insert(@RequestBody Doctor d){
         Boolean pd = doctorService.insert(d);

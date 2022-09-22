@@ -69,9 +69,6 @@ public class OfficesController {
         }
         else{
             for(Doctor d: doctorList) {
-                d.setInfo("null");
-                d.setSkill("null");
-                d.setOffice("null");
                 if(TMapIL.containsKey(0)){
                     TMapIL.get(0).add(d);
                 }
