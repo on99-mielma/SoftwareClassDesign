@@ -392,6 +392,9 @@
                                         <h5 class="card-description">{{d.office}}</h5>
                                         <h4 class="text-dark mb-2">{{d.skill}}</h4>
                                         <h4 class="text-black-50 mt-2">{{d.info}}</h4>
+                                        <!--<div class="container">
+                                            <img v-bind:src="'../../../img/doctorPic/'+d.id+'.jpg'" v-bind:alt="d.id" height="500" width="500">
+                                        </div>-->
                                         <div class="template-demo">
                                             <button type="button" class="btn btn-dark btn-icon-text" v-on:click="setOneDoctor(d.id)">
                                                 Edit
@@ -419,6 +422,9 @@
                                 <div class="tab-content py-0 px-0" id="DocWork1">
                                     <div class="tab-pane fade show active" id="DocworkInsert" role="tabpanel" aria-labelledby="DocworkInsert-tab">
                                         <div class="container">
+                                            <div class="mt-3 form-group">
+                                                <img v-bind:src="this.doctorData.imgurl" v-bind:alt="this.doctorData.ChangedId" height="500" width="500">
+                                            </div>
                                             <div class="mt-3 form-group">
                                                 <label for="updateDoctorName" class="h3">Name</label>
                                                 <input id="updateDoctorName" class="form-control" required="required" placeholder="Name" v-bind:value="this.doctorData.NeedToUpdateData.data.name">
