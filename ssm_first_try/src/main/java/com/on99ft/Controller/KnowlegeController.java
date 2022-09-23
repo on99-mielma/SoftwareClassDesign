@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/knowledge")
 public class KnowlegeController {
@@ -85,8 +86,8 @@ public class KnowlegeController {
             if(k.getText()==null||("".equals(k.getText()))){
                 k.setText("无");
             }
-            if(k.getText().length()>=15){
-                k.setText(k.getText().substring(0,15));
+            if(k.getText().length()>=50){
+                k.setText(k.getText().substring(0,50));
             }
         }
         return new Result(code,msg,knowledgeList);

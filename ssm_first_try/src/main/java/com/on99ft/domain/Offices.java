@@ -25,6 +25,17 @@ public class Offices {
     @TableField(exist = false)
     private Map<Integer, List<Doctor>> DoctorInOffice;//0-6早上 10-16下午 20-26晚上
 
+    @TableField(exist = false)
+    private List<List<Doctor>> DoctorBut2D;
+
+    public List<List<Doctor>> getDoctorBut2D() {
+        return DoctorBut2D;
+    }
+
+    public void setDoctorBut2D(List<List<Doctor>> doctorBut2D) {
+        DoctorBut2D = doctorBut2D;
+    }
+
     public Map<Integer, List<Doctor>> getDoctorInOffice() {
         return DoctorInOffice;
     }

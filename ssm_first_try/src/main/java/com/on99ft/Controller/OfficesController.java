@@ -11,6 +11,7 @@ import com.on99ft.service.OfficesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -271,5 +272,35 @@ public class OfficesController {
         o.setDoctorInOffice(TMapIL);
         }
         return new Result(Code.GET_OFFICES_OK,"结果如下",officesList);
+    }
+    @GetMapping("/2d/id/{id}/{size}")
+    public Result selectIdWith2d(@PathVariable Long id,@PathVariable Long size){
+        Offices offices = officesService.selectById(id);
+        Integer code = offices!=null?Code.GET_OFFICES_OK:Code.GET_OFFICES_ERR;
+        String msg = offices!=null?"Successfully!":"NULL";
+        if(offices==null){
+            return new Result(code,msg,offices);
+        }
+        List<Doctor> doctorList = doctorService.WhereOffice(offices.getOfficeName());
+        if (doctorList==null) {
+            return new Result(code,msg,offices);
+        }
+        ArrayList<List<Doctor>> resultList = new ArrayList<>();
+        Long i=0L;
+        List<Doctor> tempList = new ArrayList<>();
+        for (Doctor w: doctorList) {
+            if(i.equals(size)){
+                i=0L;
+                resultList.add(tempList);
+                tempList=new ArrayList<>();
+            }
+            i+=1L;
+            tempList.add(w);
+        }
+        if(!tempList.isEmpty()){
+            resultList.add(tempList);
+        }
+        offices.setDoctorBut2D(resultList);
+        return new Result(code,msg,offices);
     }
 }
