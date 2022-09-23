@@ -83,8 +83,8 @@ public class BillboardController {
             if(w.getText()==null||("".equals(w.getText()))){
                 w.setText("无");
             }
-            if(w.getText().length()>=15){
-                w.setText(w.getText().substring(0,15));
+            if(w.getText().length()>=50){
+                w.setText(w.getText().substring(0,50));
             }
         }
         return new Result(code,msg,billboardList);
