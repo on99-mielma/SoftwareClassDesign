@@ -20,7 +20,7 @@ public class QueueRegController {
         //phone
         String pattern = "^((13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8})|(\\d{3}-\\d{6,8})|(\\d{4}-\\d{6,8})$";
         //card number
-        String pattern2 = "^([1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3})|([1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9xX])$";
+        String pattern2 = "^([1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3})|([1-9]\\d{5}(18|19|([2-3]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9xX])$";
         boolean pdPhone = (q.getPhone()==null||"".equals(q.getPhone()))?false:Pattern.matches(pattern,q.getPhone());
         boolean pdCardNumber = (q.getInfo()==null||"".equals(q.getInfo()))?false:Pattern.matches(pattern2,q.getInfo());
         if(!pdPhone||!pdCardNumber){

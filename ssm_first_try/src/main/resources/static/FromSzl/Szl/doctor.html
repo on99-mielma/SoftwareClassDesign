@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>医生页面</title>
+
+    <link rel="stylesheet" href="../assets/bootstrap-4.6.1-dist/bootstrap-4.6.1/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/vendor/Style_szl_homepage.css">
+    <link rel="stylesheet" href="../assets/css/vendor/demo.css">
+    <link rel="stylesheet" href="../assets/css/vendor/theme.css">
+
+    <style>
+        .padding_for_card{
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-bottom: 10px;
+        }
+        .no_padding{
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .no_radius{
+            border-radius: 0;
+        }
+        .divider{
+            height:0;
+            margin:.5rem 0 5rem;
+            overflow:hidden;
+            border-top:1px outset #cc3300;
+            opacity: 30%;
+            finishopacity:0;
+            style:2;
+        }
+        .intro{
+            width: 80%;
+            height: 40%;
+        }
+        .intro_img{
+            width: max(50%,13rem);
+            height: auto;
+        }
+        .intro_img img{
+            width: 100%;
+            height: auto;
+        }
+        .intro_text{
+
+        }
+        html,body{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<!--头部导航-->
+<div class="container no_padding home_inter_part" style="width: 100%;max-width: 2200px">
+
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #f0ad4e;">
+
+        <div style="margin-left: max(20%,5rem)">
+            <a class="navbar-brand" style="color: black;" href="Homepage_szl.html"><img src="../assets/img/home.png" style="width: 5rem;height: 5rem;"></a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="background-color: #f0ad4e ">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar" style="background-color: #f0ad4e;opacity: 50%" >
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="Preserve.html" style="color: black;" >预约挂号</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="resume.html" style="color: black;" >求职通道</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ArticleList.html" style="color: black" onclick="goBillboard()">医院公告</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ArticleList.html" style="color: black" onclick="goNews()">动态新闻</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ArticleList.html" style="color: black" onclick="goKnowledge()">健康科普</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div id="doc">
+    <!--面包导航-->
+    <div style="margin-left: 8rem">
+        <nav class="breadcrumb" style="background-color: white">
+            <a class="breadcrumb-item" style="text-decoration: none" href="Homepage_szl.html">首页</a>
+            <span class="breadcrumb-item active">科室导航</span>
+            <a class="breadcrumb-item" style="text-decoration: none" href="department.html">{{ office }}</a>
+            <span class="breadcrumb-item active">{{ name+"医生" }}</span>
+        </nav>
+    </div>
+    <!--医生介绍-->
+    <div class="spotlight bg-cover bg-size--cover home_inter_part">
+        <div class="container-fluid no_padding" style="height:max(90%,1000px);width: 90%;max-width: 2200px;background-color: #f0ad4e">
+            <div class="row" style="max-width: 1500px;">
+                <div class="col-12 col-lg-5">
+                    <img class="" v-bind:src="'../assets/img/doctorPic/'+id+'.jpg'" alt="" style="max-width:100%;max-height:100%;min-width: 100%;min-height: 100%">
+                </div>
+                <div class="col-12 col-lg-6 offset-lg-1">
+                    <div class="row">
+                        <div class="col-12 card no_radius no_padding" style="background-color: #f0ad4e;border-color: #f0ad4e;margin-left: 15px;margin-top: 2rem;margin-bottom: 2rem">
+                            <div class="card-body no_padding" >
+                                <h3 class="card-title" style="">{{ name+"医生简介" }}</h3>
+                                <p class="card-text" style="color: whitesmoke;white-space: pre-wrap">{{ info}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 card no_radius no_padding" style="background-color: #f0ad4e;border-color: #f0ad4e;margin-left: 15px;">
+                            <div class="card-body no_padding" >
+                                <h3 class="card-title">诊治专长</h3>
+                                <p class="card-text" style="color: whitesmoke">{{ skill}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--时间表-->
+    <div class="container-fluid home_inter_part" style="width: 80%;max-width: 1800px">
+        <div>
+            <h2>
+                时间表
+            </h2>
+        </div>
+        <table class="table table-bordered">
+
+            <tr class="" style="color:whitesmoke;background-color: #f0ad4e;">
+                <th style="width: 10%"><div style="font-size: 1.4rem;padding-top: 20px"><p class="text-center" style="">医生</p></div></th>
+                <th style="width: 10%"><div style="font-size: 1.4rem;padding-top: 20px"><p class="text-center" style="">科室</p></div></th>
+                <th style="width: 70%"><div style="font-size: 1.4rem;padding-top: 20px"><p class="text-center" style="">时间安排</p></div></th>
+            </tr>
+            <tr>
+
+                <td class="text-center" style="background-color: #f0ad4e;color:whitesmoke;">
+                    <div style="font-size: 1.4rem;padding-top: 9rem"><p class="text-center" style="">{{name}}</p></div>
+                </td>
+
+                <td class="text-center" style="background-color: #f0ad4e;color:whitesmoke;">
+                    <div style="font-size: 1.4rem;padding-top: 9rem"><p class="text-center" style="">{{office}}</p></div>
+                </td>
+
+                <td style="padding: 0 0 0 0">
+                    <table style="width: 100%;">
+                        <tr style="background-color: #ade5ff">
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">时间段</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date1 }}</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date2 }}</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date3 }}</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date4 }}</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date5 }}</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date6 }}</p></th>
+                            <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date7 }}</p></th>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center a_center" style="padding-top: 40px;background-color: lavenderblush">
+                                <h5 >上午</h5>
+                            </td>
+                            <td class="text-center" style="width: 10%" v-for="doc in morning">
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 10%;background-color: lightyellow">
+                                <h5 class="text-center" style="padding-top: 40px;">下午</h5>
+                            </td>
+                            <td class="text-center" style="width: 10%" v-for="doc in afternoon">
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 10%;background-color: lightcyan">
+                                <h5 class="text-center" style="padding-top: 40px">晚上</h5>
+                            </td>
+                            <td class="text-center" style="width: 10%" v-for="doc in night">
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+<!--底部导航栏-->
+<div class="container-fluid no_padding" style="width: 100%;max-width: 2200px">
+    <footer class="pt-5 pb-3 footer footer-dark" style="background-color: #f0ad4e;color: black">
+        <div class="container" >
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="pr-lg-5">
+                        <h1 class="heading h6 text-uppercase font-weight-700 mb-3"><strong>课程设计</strong> by sun,on99</h1>
+                        <p> 此处可以添加一些医院的信息地址邮编啥的</p>
+                        <p>地址：南京市玄武区孝陵卫南京理工大学</p>
+                        <p>邮编：000000</p>
+                        <p>邮箱:666@gmail.com</p>
+                        <p>电话:123456789</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md">
+                    <h5 class="heading h6 text-uppercase font-weight-700 mb-3">友情链接</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="" href="http://www.china-pharmacy.com/" style="color: black">中国药房</a></li>
+                        <li><a class="" href="https://fuwu.nhsa.gov.cn/" style="color: black">国家医保服务平台</a></li>
+                        <li><a class="" href="https://www.yaozh.com/" style="color: black">药智网</a></li>
+                        <li><a class="" href="http://www.a-hospital.com/" style="color: black">a+医学百科</a></li>
+                        <li><a class="" href="https://www.mvyxws.com/" style="color: black">医学微视</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="pr-lg-5">
+                        <h1 class="heading h6 text-uppercase font-weight-700 mb-3"><strong>课程设计</strong> by sun,on99</h1>
+                        <p>Copyright 晖神医院 All Rights Reserved.</p>
+                        <p>本站内容仅供参考，不作为诊断及医疗依据</p>
+                        <p>京ICP 备 xxx号</p>
+                        <p>文保网安备案号：xxxxxxx</p>
+                        <p>京卫网审字【xxxx】第xxx号</p>
+                        <p>网站建设：on99，lwindsy</p>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <span class="">
+                &copy; 2022 <a href="https://cs.njust.edu.cn" class="footer-link" target="_blank">njust cs faculty</a>. All rights reserved.
+              </span>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<!-引入的js-->
+<script src="../assets/js/vendor/jquery.min.js"></script>
+<script src="../assets/bootstrap-4.6.1-dist/bootstrap-4.6.1/dist/js/bootstrap.js"></script>
+<script src="../assets/js/axios-0.18.0.js" type="text/javascript"></script>
+<script src="../assets/js/kiton99/vue.global.js"></script>
+
+<!--自个写的js-->
+<script src="../assets/js/For_doc.js" type="module"></script>
+<script src="../assets/js/For_everything.js"></script>
+
+</body>
+</html>
