@@ -544,6 +544,31 @@ const App = {
                     return;
                 }
                 console.log(idUpdate);
+                let morning = [];
+                let afternoon = [];
+                let night = [];
+                var regax = /^(0|[1-9][0-9]*)$/;
+                for (let i = 0; i < 7; i++) {
+/*                    console.log("进入循环"+i);*/
+                    let mIdStr = "updateDoctorMorningDtt"+i;
+                    let m = document.getElementById(mIdStr).value;
+                    let aIdStr = "updateDoctorAfternoonDtt"+i;
+                    let a = document.getElementById(aIdStr).value;
+                    let nIdStr = "updateDoctorNightDtt"+i;
+                    let n = document.getElementById(nIdStr).value;
+/*                    console.log("m的type:"+typeof m);*/
+                    if(m===''||m===null||a===''||a===null||n===''||n===null){
+                        alert("检测到空值！");
+                        return;
+                    }
+                    if(!regax.test(m)||!regax.test(a)||!regax.test((n))){
+                        alert("检测到格式错误！请检查输入格式！");
+                        return;
+                    }
+                    morning.push(m);
+                    afternoon.push(a);
+                    night.push(n);
+                }
                 let articleDate = new Date().toISOString();
                 let articleDateFinal = this.UTCtoGMT8(articleDate);
                 let p = {
@@ -552,7 +577,10 @@ const App = {
                     "office":office,
                     "skill":skill,
                     "info":info,
-                    "date":articleDateFinal
+                    "date":articleDateFinal,
+                    "morning":morning,
+                    "afternoon":afternoon,
+                    "night":night,
                 }
                 axios({
                     url:url+"doctor/",

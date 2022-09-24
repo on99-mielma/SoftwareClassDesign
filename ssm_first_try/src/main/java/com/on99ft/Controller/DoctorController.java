@@ -38,7 +38,16 @@ public class DoctorController {
     @PutMapping
     public Result update(@RequestBody Doctor d){
         Boolean pd = doctorService.update(d);
-        return new Result(pd?Code.UPDATE_OK:Code.UPDATE_ERR,pd);
+        if(pd){
+            Dtt dtt = new Dtt();
+            dtt.setMorning(String.join("/",d.getMorning()));
+            dtt.setAfternoon(String.join("/",d.getAfternoon()));
+            dtt.setNight(String.join("/",d.getNight()));
+            dtt.setId(d.getId());
+            boolean pd2 = dttService.update(dtt);
+                return new Result(pd2?Code.UPDATE_OK:Code.UPDATE_ERR,d);
+        }
+        return new Result(Code.UPDATE_ERR,d);
     }
 
 
