@@ -444,21 +444,39 @@
                                             <div class="row mt-3 form-group">
                                                 <p class="h2 text-primary"> 上午时间段 : </p>
                                                 <div class="col-1" v-for="(a,index) in this.doctorData.NeedToUpdateData.data.morning">
-                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3">星期 {{index}} : </label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==0"> 星期天 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==1"> 星期一 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==2"> 星期二 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==3"> 星期三 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==4"> 星期四 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==5"> 星期五 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorMorningDtt'+index" class="h3" v-if="index==6"> 星期六 :</label>
                                                     <input v-bind:id="'updateDoctorMorningDtt'+index" class="form-control" placeholder="$?" required v-bind:value="a">
                                                 </div>
                                             </div>
                                             <div class="row mt-3 form-group">
                                                 <p class="h2 text-primary"> 下午时间段 : </p>
                                                 <div class="col-1" v-for="(a,index) in this.doctorData.NeedToUpdateData.data.afternoon">
-                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3">星期 {{index}} : </label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==0"> 星期天 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==1"> 星期一 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==2"> 星期二 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==3"> 星期三 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==4"> 星期四 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==5"> 星期五 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorAfternoonDtt'+index" class="h3" v-if="index==6"> 星期六 :</label>
                                                     <input v-bind:id="'updateDoctorAfternoonDtt'+index" class="form-control" placeholder="$?" required v-bind:value="a">
                                                 </div>
                                             </div>
                                             <div class="row mt-3 form-group">
                                                 <p class="h2 text-primary"> 夜晚时间段 : </p>
                                                 <div class="col-1" v-for="(a,index) in this.doctorData.NeedToUpdateData.data.night">
-                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3">星期 {{index}} : </label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==0"> 星期天 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==1"> 星期一 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==2"> 星期二 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==3"> 星期三 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==4"> 星期四 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==5"> 星期五 :</label>
+                                                    <label class="text-dark" v-bind:for="'updateDoctorNightDtt'+index" class="h3" v-if="index==6"> 星期六 :</label>
                                                     <input v-bind:id="'updateDoctorNightDtt'+index" class="form-control" placeholder="$?" required v-bind:value="a">
                                                 </div>
                                             </div>
