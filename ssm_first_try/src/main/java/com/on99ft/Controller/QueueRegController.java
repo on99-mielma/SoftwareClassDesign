@@ -27,7 +27,7 @@ public class QueueRegController {
             return new Result(Code.SAVE_ERR,"格式检测到错误","格式检测到错误");
         }
         boolean pd = queueRegService.save(q);
-        return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,q);
+        return new Result(pd?Code.SAVE_OK:Code.SAVE_ERR,pd?"挂号成功！请凭身份证在医生值班时间段去医院诊治":"挂号失败，请检查重试",q);
     }
 
     @PutMapping
