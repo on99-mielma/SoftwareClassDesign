@@ -108,7 +108,7 @@
     <div class="row guide_inter_row justify-content-center" v-for="list in dpmlist" >
         <!--click展示医生,同时在locol保存选择的科室-->
         <div class="col-lg-2 " v-for="dpm in list">
-            <button class="btn btn-block btn-outline-secondary shadow-sm" @click="get_Doc(dpm.id,dpm.officeName)">{{ dpm.officeName }}</button>
+            <button class="btn btn-block btn-outline-secondary shadow-sm" @click="get_Doc(dpm.id,dpm.officeName);removeDocAndTimeChoose()">{{ dpm.officeName }}</button>
         </div>
     </div>
 
@@ -118,7 +118,7 @@
 
         <!--在change_img_html中根据元素id改变图片-->
         <div class="col-lg-2" v-for="doc in list">
-            <button class="btn btn-block btn-outline-secondary shadow-sm" @click="choose(doc.name);getDocData(doc.name)">{{ doc.name }}</button>
+            <button class="btn btn-block btn-outline-secondary shadow-sm" @click="choose(doc.name);getDocData(doc.name);removeTimeChoose()">{{ doc.name }}</button>
         </div>
     </div>
 
@@ -240,9 +240,10 @@
                         <div class="modal-body">
                             <h5><span>科室：</span><span>{{ dpm }}</span></h5><br>
                             <h5><span>医生：</span><span>{{ doc }}</span></h5><br>
+                            <h5><span>时间：</span><span>{{ Puretime }}</span></h5><br>
                             <h5><span>姓名：</span><span>{{ name }}</span></h5><br>
                             <h5><span>电话：</span><span>{{ phone }}</span></h5><br>
-                            <h5><span>身份证号：</span><span>{{ Info }}</span></h5><br>
+                            <h5><span>身份证号：</span><span>{{ Info }}</span></h5>
                         </div>
 
                         <!-- 模态框底部 -->

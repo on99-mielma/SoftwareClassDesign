@@ -87,15 +87,15 @@
             <div class="row">
                 <div class="col offset-1">
                     <label for="doctor_name">医生姓名:</label>
-                    <input type="text" class="form-control" placeholder="请输入.." id="doctor_name">
+                    <input type="text" class="form-control" placeholder="请输入.." id="doctor_name" autocomplete="off">
                 </div>
                 <div class="col">
                     <label for="illness_name">疾病名称:</label>
-                    <input type="text" class="form-control" placeholder="请输入.." id="illness_name">
+                    <input type="text" class="form-control" placeholder="请输入.." id="illness_name" autocomplete="off">
                 </div>
                 <div class="col">
                     <label for="department_name">科室名称:</label>
-                    <input type="text" class="form-control" placeholder="请输入.." id="department_name">
+                    <input type="text" class="form-control" placeholder="请输入.." id="department_name" autocomplete="off">
                 </div>
                 <div class="col">
                     <button type="button" class="btn btn-secondary" style="margin-top: 1rem" @click="Search_for_info()">查询</button>
@@ -262,7 +262,7 @@
                                 <h5 >上午</h5>
                             </td>
                             <td class="text-center" style="width: 10%" v-for="doc in d.morning">
-                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></div>
                                 <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                             </td>
                         </tr>
@@ -273,7 +273,7 @@
                                 <h5 class="text-center" style="padding-top: 40px;">下午</h5>
                             </td>
                             <td class="text-center" style="width: 10%" v-for="doc in d.afternoon">
-                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></div>
                                 <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                             </td>
                         </tr>
@@ -284,7 +284,7 @@
                                 <h5 class="text-center" style="padding-top: 40px">晚上</h5>
                             </td>
                             <td class="text-center" style="width: 10%" v-for="doc in d.night">
-                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></div>
                                 <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                             </td>
                         </tr>

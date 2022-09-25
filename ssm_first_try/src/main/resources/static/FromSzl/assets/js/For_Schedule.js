@@ -83,10 +83,11 @@ const loginApp1 = {
                 this.getAllDepartment();
             }
             //这里是查医生表单。疾病或医生名非空
-            if((ill!=''&&ill!=null)||(doc!=''&&doc!=null)){
+            if(((ill!=''&&ill!=null)||(doc!=''&&doc!=null))){
                 let p = {
                     "name":doc,
-                    "skill":ill
+                    "skill":ill,
+                    "office":dpm
                 }
                 console.log(p);
                 axios({
@@ -103,11 +104,11 @@ const loginApp1 = {
                     this.doctor_data.data=res.data.data;
                 })
             }
-            //这里是查科室表单。只有科室非空
+            //这里是查科室表单。科室非空
             else{
                 let p = {
-                    "officeName":dpm
-                }
+                    "officeName":dpm,
+                };
                 console.log(p);
                 axios({
                     url:url+"offices/LOAD/",

@@ -30,18 +30,10 @@ const app = {
             doc:'',
             dpm:'',
             time:'',
+            Puretime:''
         }
     },
     methods:{
-        UTCtoGMT8(dateForm){
-            if (dateForm === "") {  //解决deteForm为空传1970-01-01 00:00:00
-                return "";
-            }else{
-                let dateee = new Date(dateForm).toJSON();
-                let date1 = new Date(+new Date(dateee)+ 8 * 3600 * 1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-                return date1;
-            }
-        },
         getAllDpm(){
             axios({
                 url:url+"offices/2d/4",
@@ -144,39 +136,59 @@ const app = {
         chooseTime(id,time){
             if(id == 0){
                 this.time = "计划于 "+this.date1+"的"+time+"前往";
+                this.Puretime = this.date1+" "+time;
             }
             else
             if(id == 1){
                 this.time = "计划于 "+this.date2+"的"+time+"前往";
+                this.Puretime = this.date2+" "+time;
             }
             else
             if(id == 2){
                 this.time = "计划于 "+this.date3+"的"+time+"前往";
+                this.Puretime = this.date3+" "+time;
             }
             else
             if(id == 3){
                 this.time = "计划于 "+this.date4+"的"+time+"前往";
+                this.Puretime = this.date4+" "+time;
             }
             else
             if(id == 4){
                 this.time = "计划于 "+this.date5+"的"+time+"前往";
+                this.Puretime = this.date5+" "+time;
             }
             else
             if(id == 5){
                 this.time = "计划于 "+this.date6+"的"+time+"前往";
+                this.Puretime = this.date6+" "+time;
             }
             else
             if(id == 6){
                 this.time = "计划于 "+this.date7+"的"+time+"前往";
+                this.Puretime = this.date7+" "+time;
             }
             document.getElementById("time_choose_describe").innerText=this.time;
             document.getElementById("time_choose_describe").style.display='inline';
             document.getElementById("Msg").style.display="none";
         },
+        removeAllChoose(){
+            this.doc = localStorage.removeItem("dpm_select");
+            this.doc = localStorage.removeItem("doc_select");
+            this.time = '';
+        },
+        removeDocAndTimeChoose(){
+            this.doc = localStorage.removeItem("doc_select");
+            this.time = '';
+        },
+        removeTimeChoose(){
+            this.time = '';
+        }
     },
     beforeMount(){
         this.getAllDpm();
         this.getMyDate();
+        this.removeAllChoose();
     }
 }
 const aa = Vue.createApp(app);

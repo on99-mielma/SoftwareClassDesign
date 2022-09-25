@@ -167,7 +167,7 @@
                                 <h5 >上午</h5>
                             </td>
                             <td class="text-center" style="width: 10%" v-for="doc in morning">
-                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></div>
                                 <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                             </td>
                         </tr>
@@ -178,7 +178,7 @@
                                 <h5 class="text-center" style="padding-top: 40px;">下午</h5>
                             </td>
                             <td class="text-center" style="width: 10%" v-for="doc in afternoon">
-                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></div>
                                 <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                             </td>
                         </tr>
@@ -189,7 +189,7 @@
                                 <h5 class="text-center" style="padding-top: 40px">晚上</h5>
                             </td>
                             <td class="text-center" style="width: 10%" v-for="doc in night">
-                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> 在岗 </h5></div>
+                                <div class="text-center" v-if="doc != '0'"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></div>
                                 <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                             </td>
                         </tr>
