@@ -94,7 +94,7 @@ const app = {
                 "doctor":this.doc,
                 "name":this.name,
                 "phone":this.phone,
-                "date":articleDateFinal
+                "time":articleDateFinal
             };
             axios({
                 url:url+"queuereg/insert",
