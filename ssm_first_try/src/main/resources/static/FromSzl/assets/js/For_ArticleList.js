@@ -123,23 +123,33 @@ const doc = {
         },
         setLastPage(){
             this.cur = (parseInt(this.cur)-1).toString();
+            if(this.cur<1) this.cur=1;
         },
         setNextPage(){
             this.cur = (parseInt(this.cur)+1).toString();
+            if(this.cur>this.pages) this.cur=this.pages;
         },
         setCurPage(cur){
             if(cur>this.pages) cur=this.pages;
             this.cur = cur;
+        },
+        judgeNextAndLast(){
             if(this.cur == this.pages) {
                 document.getElementById("Next").classList.add("disabled","text-gray");
                 document.getElementById("Next_text").style.color="lightgray";
                 document.getElementById("Next_text").style.fontWeight="normal";
+                document.getElementById("Last").classList.remove("disabled","text-gray");
+                document.getElementById("Last_text").style.color="black";
+                document.getElementById("Last_text").style.fontWeight="bold";
             }
             else
             if(this.cur == 1) {
                 document.getElementById("Last").classList.add("disabled","text-gray");
                 document.getElementById("Last_text").style.color="lightgray";
                 document.getElementById("Last_text").style.fontWeight="normal";
+                document.getElementById("Next").classList.remove("disabled","text-gray");
+                document.getElementById("Next_text").style.color="black";
+                document.getElementById("Next_text").style.fontWeight="bold";
             }
             else {
                 document.getElementById("Last").classList.remove("disabled","text-gray");
@@ -149,7 +159,7 @@ const doc = {
                 document.getElementById("Next_text").style.color="black";
                 document.getElementById("Next_text").style.fontWeight="bold";
             }
-        },
+        }
     },
     beforeMount(){
         this.getData();

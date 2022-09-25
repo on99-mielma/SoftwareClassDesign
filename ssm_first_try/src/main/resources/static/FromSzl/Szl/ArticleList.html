@@ -100,9 +100,16 @@
     </div>
 
     <ul class="pagination justify-content-center" >
-        <li id="Last" class="page-item"><a id="Last_text" class="page-link disabled text-gray" style="color: lightgray;font-weight: normal" href="#" @click="setLastPage();getCurData();">上一页</a></li>
-        <li class="page-item" v-for="page in pages"><a :id=page class="page-link" style="color: black" href="#" @click="setCurPage(page);getCurData()">{{page}}</a></li>
-        <li id="Next" class="page-item"><a id="Next_text"  class="page-link" style="color: black;font-weight: bold" href="#" @click="setNextPage();getCurData();">下一页</a></li>
+        <li id="Last" class="page-item"><a id="Last_text" class="page-link disabled text-gray" style="color: lightgray;font-weight: normal" href="#" @click="setLastPage();getCurData();judgeNextAndLast()">上一页</a></li>
+        <li class="page-item" v-for="page in pages">
+            <a :id=page class="page-link" style="color: black" href="#" @click="setCurPage(page);getCurData();judgeNextAndLast()" v-if="page != 1">
+                {{page}}
+            </a>
+            <a :id=page class="page-link" style="color: white;background-color: #288cff" href="#" @click="setCurPage(page);getCurData();judgeNextAndLast()" v-else>
+                {{page}}
+            </a>
+        </li>
+        <li id="Next" class="page-item"><a id="Next_text"  class="page-link" style="color: black;font-weight: bold" href="#" @click="setNextPage();getCurData();judgeNextAndLast()">下一页</a></li>
     </ul>
 
 </div>
