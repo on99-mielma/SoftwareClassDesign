@@ -517,7 +517,7 @@ const App = {
             setOneDoctor (id){
                 this.doctorData.ChangedId = id ;
                 console.log(id);
-                this.doctorData.imgurl = "../../../img/doctorPic/"+id+".jpg";
+                this.doctorData.imgurl = "../../../FromSzl/assets/img/doctorPic/"+id+".jpg";
                 this.doctorData.doctorGS = false ;
                 this.doctorData.doctorWork = true ;
                 this.doctorData.doctorEdit = false ;

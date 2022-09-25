@@ -46,6 +46,7 @@ public class DoctorServiceImpl implements DoctorService{
         QueryWrapper<Doctor> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNotBlank(d.getName()),"name",d.getName());
         queryWrapper.like(StringUtils.isNotBlank(d.getOffice()),"office",d.getOffice());
+        queryWrapper.orderByDesc("id");
         return doctorDao.selectList(queryWrapper);
     }
 
@@ -61,6 +62,7 @@ public class DoctorServiceImpl implements DoctorService{
         QueryWrapper<Doctor> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNotBlank(d.getSkill()),"skill",d.getSkill());
         queryWrapper.like(StringUtils.isNotBlank(d.getInfo()),"info",d.getInfo());
+        queryWrapper.orderByDesc("id");
         return doctorDao.selectList(queryWrapper);
     }
 
@@ -70,6 +72,7 @@ public class DoctorServiceImpl implements DoctorService{
         queryWrapper.like(StringUtils.isNotBlank(d.getOffice()),"office",d.getOffice());
         queryWrapper.like(StringUtils.isNotBlank(d.getSkill()),"skill",d.getSkill());
         queryWrapper.like(StringUtils.isNotBlank(d.getInfo()),"info",d.getInfo());
+        queryWrapper.orderByDesc("id");
         return doctorDao.selectList(queryWrapper);
     }
 }
