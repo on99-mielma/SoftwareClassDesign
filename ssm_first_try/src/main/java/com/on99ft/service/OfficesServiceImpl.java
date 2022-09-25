@@ -54,6 +54,7 @@ public class OfficesServiceImpl implements OfficesService {
     public List<Offices> LikeName(Offices offices) {
         QueryWrapper<Offices> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNotBlank(offices.getOfficeName()),"officeName",offices.getOfficeName());
+        queryWrapper.like(StringUtils.isNotBlank(offices.getOfficeInfo()),"officeInfo",offices.getOfficeInfo());
         return officesDao.selectList(queryWrapper);
     }
 }
