@@ -7,12 +7,12 @@ const doc = {
             msg:'',
             code:0,
             pages:0,
+            cur:1
         }
     },
     methods:{
         getData(){
             let type = localStorage.getItem("type");
-            localStorage.setItem("curPage",1);
             if(type == 'news'){
                 this.type='动态新闻';
                 axios({
@@ -76,12 +76,11 @@ const doc = {
             }
         },
         getCurData(){
-            let cur = localStorage.getItem("curPage");
             let type = localStorage.getItem("type");
             if(type == 'news'){
                 this.type='动态新闻';
                 axios({
-                    url:url+"article/gs/"+cur+"/10",
+                    url:url+"article/gs/"+this.cur+"/10",
                     method:"GET",
                 }).then((res)=>{
                     this.msg = res.data.msg;
@@ -92,7 +91,7 @@ const doc = {
             else if(type == 'knowledge'){
                 this.type='健康知识';
                 axios({
-                    url:url+"knowledge/gs/"+cur+"/10",
+                    url:url+"knowledge/gs/"+this.cur+"/10",
                     method:"GET",
                 }).then((res)=>{
                     this.msg = res.data.msg;
@@ -104,7 +103,7 @@ const doc = {
             else{
                 this.type='医院公告';
                 axios({
-                    url:url+"billboard/gs/"+cur+"/10",
+                    url:url+"billboard/gs/"+this.cur+"/10",
                     method:"GET",
                 }).then((res)=>{
                     this.msg = res.data.msg;
@@ -112,29 +111,32 @@ const doc = {
                     this.artList = res.data.data;
                 });
             }
+            for(let i = 1;i<=this.pages;i++){
+                document.getElementById(i).style.backgroundColor = "white";
+                document.getElementById(i).style.color = "black";
+            }
+            document.getElementById(this.cur).style.backgroundColor = "#288cff";
+            document.getElementById(this.cur).style.color = "white";
         },
         gotoart(id){
             localStorage.setItem("article_id",id);
         },
         setLastPage(){
-            let cur = localStorage.getItem("curPage");
-            localStorage.setItem("curPage",(parseInt(cur)-1).toString());
+            this.cur = (parseInt(this.cur)-1).toString();
         },
         setNextPage(){
-            let cur = localStorage.getItem("curPage");
-            localStorage.setItem("curPage",(parseInt(cur)+1).toString());
+            this.cur = (parseInt(this.cur)+1).toString();
         },
         setCurPage(cur){
             if(cur>this.pages) cur=this.pages;
-            localStorage.setItem("curPage",cur);
-            let aa = localStorage.getItem("curPage");
-            if(aa == this.pages) {
+            this.cur = cur;
+            if(this.cur == this.pages) {
                 document.getElementById("Next").classList.add("disabled","text-gray");
                 document.getElementById("Next_text").style.color="lightgray";
                 document.getElementById("Next_text").style.fontWeight="normal";
             }
             else
-            if(aa == 1) {
+            if(this.cur == 1) {
                 document.getElementById("Last").classList.add("disabled","text-gray");
                 document.getElementById("Last_text").style.color="lightgray";
                 document.getElementById("Last_text").style.fontWeight="normal";

@@ -168,7 +168,7 @@
 	<div class="row guide_inter_row justify-content-center" v-for="list in dpmList.data">
 		<!--在change_img_html中根据元素id改变图片-->
 		<div class="col-lg-2" v-for="(dpm,i) in list">
-			<a href="department.html" style="text-decoration: none"><button v-bind:id=i class="btn btn-block btn-outline-secondary shadow-sm" @mouseenter="ChangeImgHtml(dpm.id,dpm.officeName);" @click="go_office(dpm.id,dpm.officeName)">{{ dpm.officeName }}</button></a>
+			<a href="department.html" style="text-decoration: none"><button :id=i class="btn btn-block btn-outline-secondary shadow-sm" @mouseenter="ChangeImgHtml(dpm.id,dpm.officeName);" @click="go_office(dpm.id,dpm.officeName)">{{ dpm.officeName }}</button></a>
 		</div>
 	</div>
 </div>
