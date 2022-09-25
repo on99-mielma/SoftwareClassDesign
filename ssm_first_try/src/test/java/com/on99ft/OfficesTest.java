@@ -1,6 +1,9 @@
 package com.on99ft;
 
+import com.on99ft.domain.Doctor;
 import com.on99ft.domain.Offices;
+import com.on99ft.service.DoctorService;
+import com.on99ft.service.DttService;
 import com.on99ft.service.OfficesService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,12 @@ import java.util.List;
 public class OfficesTest {
     @Autowired
     private OfficesService officesService;
+
+    @Autowired
+    private DoctorService doctorService;
+
+    @Autowired
+    private DttService dttService;
 
     @Test
     void test1(){
@@ -53,5 +62,16 @@ public class OfficesTest {
                 "\n" +
                 "　　1980年代，我科张宏誉教授在中国率先开始了遗传性血管神经性水肿的研究，迄今已收集来自90多个家系的360多例病人，在国际上也是病例数较多的临床研究中心。对HAE的发病机制、临床特点及治疗进行了深入研究，对此领域的研究已达国际领先水平，并于200？年发现了HAE新的基因突变类型，并就相关研究结果进行了报道和国际学术交流。");
         officesService.insert(offices);
+    }
+
+    @Test
+    void test3(){
+        Doctor doctor = new Doctor();
+        doctor.setName("");
+        doctor.setOffice("");
+        List<Doctor> doctorList = doctorService.LikeNameAndOffice(doctor);
+        for (Doctor d: doctorList) {
+            System.out.println(dttService.selectOne(d.getId()));
+        }
     }
 }
