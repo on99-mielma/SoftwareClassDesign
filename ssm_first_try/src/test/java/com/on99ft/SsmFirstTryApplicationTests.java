@@ -28,7 +28,7 @@ class SsmFirstTryApplicationTests {
         System.out.println("userList = " + userList);
     }
 
-    @Test
+    /*@Test
     void test3(){
         User user = new User();
         user.setuDepartment("?");
@@ -36,9 +36,9 @@ class SsmFirstTryApplicationTests {
         user.setuPw("?");
         user.setuSchool("?");
         userService.save(user);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void test4(){
         User user = new User();
         user.setuId(9L);
@@ -46,7 +46,7 @@ class SsmFirstTryApplicationTests {
         user.setuName("??");
         user.setuPw("??");
         userService.update(user);
-    }
+    }*/
 
 
 }

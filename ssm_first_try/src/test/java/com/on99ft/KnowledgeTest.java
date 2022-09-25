@@ -37,7 +37,7 @@ public class KnowledgeTest {
         }
     }
 
-    @Test
+    /*@Test
     void test1(){
         Knowledge k = new Knowledge();
         k.setTitle("孩子长不高必须要注意这几点");
@@ -51,14 +51,14 @@ public class KnowledgeTest {
                 "\n" +
                 "只要让孩子吃好，睡好，运动好就可以长高");
         knowledgeService.insert(k);
-    }
+    }*/
     @Test
     void test2(){
         Knowledge knowledge = knowledgeService.getById(1564832523300245506L);
         System.out.println("knowledge = " + knowledge);
     }
 
-    @Test
+    /*@Test
     void test3(){
         Article a = new Article();
         a.setAuthor("on99");
@@ -71,7 +71,7 @@ public class KnowledgeTest {
                 "启动仪式上，在全国政协副主席、农工党中央常务副主席何维，中国工程院院士张学，北京协和医院院长张抒扬的共同见证下，北京协和医院副院长杜斌与中国国际投资促进会副会长、中国初级卫生保健基金会理事狄森分别代表医院与中国初级卫生保健基金会签署合作协议。签约仪式后，国家卫生健康委科教司监察专员刘登峰和北京协和医院党委书记吴沛新为项目揭牌。伴随与会嘉宾在大屏幕上按下启动键，国家标准化罕见病诊疗中心项目正式启动。");
         a.setTitle("精准帮扶工程 | 国家标准化罕见病诊疗中心在北京协和医院启动");
         articleService.insert(a);
-    }
+    }*/
 
     @Test
     void test4(){
@@ -87,7 +87,7 @@ public class KnowledgeTest {
         LocalDateTime ldt = LocalDateTime.now();
         System.out.println("ldt = " + ldt);
     }
-    @Test
+    /*@Test
     void test5(){
         Doctor d = new Doctor();
         d.setName("66uo");
@@ -96,13 +96,13 @@ public class KnowledgeTest {
         d.setSkill("1");
         doctorService.insert(d);
         System.out.println("d = " + d);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void test6(){
         Dtt dtt = new Dtt();
         dtt.setId(1570252461800316930L);
         dttService.insert(dtt);
         System.out.println("dtt = " + dtt);
-    }
+    }*/
 }

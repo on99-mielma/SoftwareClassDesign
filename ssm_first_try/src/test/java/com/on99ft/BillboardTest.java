@@ -15,7 +15,7 @@ public class BillboardTest {
     @Autowired
     private BillboardService billboardService;
 
-    @Test
+    /*@Test
     void test0(){
         Billboard billboard = new Billboard();
         billboard.setTitle("");
@@ -24,7 +24,7 @@ public class BillboardTest {
         billboard.setDate(ldt);
         billboard.setAuthor("本站原创");
         billboardService.insert(billboard);
-    }
+    }*/
 
     @Test
     void test1(){

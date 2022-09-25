@@ -15,7 +15,7 @@ public class ResumeTest {
     @Autowired
     private ResumeService resumeService;
 
-    @Test
+    /*@Test
     void test0() {
         Resume resume = resumeService.selectId(1572181320401563649L);
         String filepath="D:\\作业论文\\计算机网络\\111.docx";
@@ -32,5 +32,5 @@ public class ResumeTest {
         } catch (Exception e) {
             System.out.println("error");
         }
-    }
+    }*/
 }
