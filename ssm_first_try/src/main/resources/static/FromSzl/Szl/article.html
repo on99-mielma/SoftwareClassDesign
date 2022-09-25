@@ -50,7 +50,7 @@
 <body>
 
 <!--头部导航-->
-<div class="container no_padding home_inter_part" style="width: 100%;max-width: 2200px">
+<div class="container no_padding" style="width: 100%;max-width: 2200px;margin-bottom: 3rem">
 
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #f0ad4e;">
 
@@ -84,8 +84,8 @@
 </div>
 
 <!--文章主体-->
-<div id="article" class="container-fluid justify-content-center" style="width: 80%;max-width: 2200px;margin-left: 20%">
-    <div style="margin-left: -15rem">
+<div id="article" class="container-fluid justify-content-center" style="width: 80%;max-width: 2200px;">
+    <div class="container-fluid no_padding" style="width: 90%;max-width: 2200px;">
         <nav class="breadcrumb" style="background-color: white">
             <a class="breadcrumb-item" href="Homepage_szl.html">首页</a>
             <span class="breadcrumb-item">{{ type }}</span>
@@ -93,7 +93,7 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-12 ">
+        <div class="col-lg-6 col-12 offset-lg-2">
             <div class="card text-center border-0">
                 <div class="card-title">
                     <h3  >{{ title }}</h3>
@@ -105,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class="card img-fluid home_article col-12 col-lg-3 border-0 shadow" style="height: 650px">
+        <div class="card img-fluid home_article col-12 col-lg-3 border-0 shadow" style="height: min(50%,650px)">
             <img class="card-img-top" src="../assets/img/demo/1.jpg" alt="Card image">
             <div class="">
                 <h3 style="margin: 0.3rem 0 0.3rem 0">动态新闻</h3>

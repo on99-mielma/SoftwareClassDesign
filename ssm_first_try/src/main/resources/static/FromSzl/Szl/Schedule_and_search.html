@@ -64,7 +64,7 @@
 
 
 <!--面包导航-->
-<div style="margin-left: 10rem;margin-bottom: 2rem">
+<div class="container-fluid no_padding" style="width: 90%;max-width: 1600px;">
     <nav class="breadcrumb" style="background-color: white">
         <a class="breadcrumb-item" style="text-decoration: none" href="Homepage_szl.html">首页</a>
         <span class="breadcrumb-item active">医生时间表</span>
@@ -77,7 +77,7 @@
 </div>
 
 <!--搜索框、时间表单-->
-<div id="Schedule" class="container-fluid justify-content-center home_inter_part" style="width: 80%;padding-left: 0;padding-right: 0;margin-top: 5rem">
+<div id="Schedule" class="container-fluid justify-content-center home_inter_part" style="width: 80%;max-width:1600px;padding-left: 0;padding-right: 0;margin-top: 5rem">
 
     <!--搜索框-->
     <div class="justify-content-start">
@@ -120,10 +120,10 @@
             </tr>
             <tr v-for="(d,i) in this.department_data.data">
                 <td class="text-center" style="padding-top: 10rem;background-color: #b94a48;">
-                        <h5 style="color: whitesmoke">{{d.officeName}}</h5>
-                    </td>
+                    <h5 style="color: whitesmoke">{{d.officeName}}</h5>
+                </td>
                 <td style="padding: 0 0 0 0">
-                        <table style="width: 100%;">
+                    <table style="width: 100%;">
                             <tr style="background-color: #ade5ff">
                                 <th style="width: 10%"><p class="text-center" style="font-size: 1rem">时间段</p></th>
                                 <th style="width: 10%"><p class="text-center" style="font-size: 1rem">{{ date1 }}</p></th>
@@ -162,7 +162,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table style="width: 100%;">
+                    <table style="width: 100%;">
                             <tr>
                                 <td style="width: 10%;background-color: lightyellow">
                                     <h5 class="text-center" style="padding-top: 40px;">下午</h5>
@@ -190,7 +190,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table style="width: 100%">
+                    <table style="width: 100%">
                             <tr>
                                 <td style="width: 10%;background-color: lightcyan">
                                     <h5 class="text-center" style="padding-top: 40px">晚上</h5>
@@ -218,7 +218,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </td>
+                </td>
             </tr>
         </table>
 

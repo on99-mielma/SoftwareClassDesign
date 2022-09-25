@@ -89,8 +89,8 @@
 </div>
 
 <!--面包导航-->
-<div style="margin-left: 16rem;margin-bottom: 2rem">
-    <nav class="breadcrumb" style="background-color: white">
+<div class="container-fluid no_padding" style="width: 90%;max-width: 1400px;">
+    <nav class="breadcrumb" style="background-color: white;margin-left: 5%">
         <a class="breadcrumb-item" style="text-decoration: none" href="Homepage_szl.html">首页</a>
         <span class="breadcrumb-item active">挂号界面</span>
     </nav>
@@ -154,7 +154,7 @@
                             <h5 >上午</h5>
                         </td>
                         <td class="text-center" style="width: 10%" v-for="(doc,i) in d.morning">
-                            <div class="text-center" v-if="doc != '0'"><a href="#doc_table" @click="chooseTime(i,'早上')"><h5 style="color:#288cff"> 在岗 </h5></a></div>
+                            <div class="text-center" v-if="doc != '0'"><a href="#doc_table" @click="chooseTime(i,'早上')"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></a></div>
                             <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                         </td>
                     </tr>
@@ -165,7 +165,7 @@
                             <h5 class="text-center" style="padding-top: 40px;">下午</h5>
                         </td>
                         <td class="text-center" style="width: 10%" v-for="(doc,i) in d.afternoon">
-                            <div class="text-center" v-if="doc != '0'"><a href="#doc_table" @click="chooseTime(i,'中午')"><h5 style="color:#288cff"> 在岗 </h5></a></div>
+                            <div class="text-center" v-if="doc != '0'"><a href="#doc_table" @click="chooseTime(i,'中午')"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></a></div>
                             <div v-else="doc === '0'"><h5 style="color:#288cff" class="text-center"> - </h5></div>
                         </td>
                     </tr>
@@ -176,7 +176,7 @@
                             <h5 class="text-center" style="padding-top: 40px">晚上</h5>
                         </td>
                         <td class="text-center" style="width: 10%" v-for="(doc,i) in d.night">
-                            <div class="text-center" v-if="doc != '0'"><a href="#doc_table" @click="chooseTime(i,'晚上')"><h5 style="color:#288cff"> 在岗 </h5></a></div>
+                            <div class="text-center" v-if="doc != '0'"><a href="#doc_table" @click="chooseTime(i,'晚上')"><h5 style="color:#288cff"> <span>在岗</span><br><span>{{"费用："+doc+"元"}}</span> </h5></a></div>
                             <div class="text-center" v-if="doc === '0'"><h5 style="color:#288cff"> - </h5></div>
                         </td>
                     </tr>

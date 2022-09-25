@@ -76,9 +76,6 @@ const loginApp1 = {
             let doc=document.getElementById("doctor_name").value;
             let dpm=document.getElementById("department_name").value;
             let ill=document.getElementById("illness_name").value;
-            console.log(doc);
-            console.log(dpm);
-            console.log(ill);
             if(doc===''&&dpm===''&&ill===''){
                 this.getAllDepartment();
             }
