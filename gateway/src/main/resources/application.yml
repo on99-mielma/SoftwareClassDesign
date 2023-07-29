@@ -1,0 +1,44 @@
+server:
+  port: 10023
+spring:
+  application:
+    name: GatewayService
+  cloud:
+    gateway:
+      routes:
+        - id: Notification9Service #UUID
+          uri:
+            lb://NotificationService
+          predicates:
+            - Path=/noti/**
+        - id: Offices9Service
+          uri:
+            lb://OfficesService
+          predicates:
+            - Path=/offs/**
+        - id: passTimeAttack
+          uri:
+            lb://ErrorpageService
+          predicates:
+            - Before=2020-01-01T00:00:00.000+08:00[Asia/Shanghai]
+            - Path=/**
+          filters:
+            - RewritePath=/.*,/error/beforetime
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        cluster-name: nanjing
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+    openfeign:
+      httpclient:
+        enabled: true
+        max-connections: 200
+        max-connections-per-route: 50
+  profiles:
+    active: nacos
+logging:
+  level:
+    root: debug
+
